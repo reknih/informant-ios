@@ -18,9 +18,10 @@ namespace vplan
 			: base (UserInterfaceIdiomIsPhone ? "SecondViewController_iPhone" : "SecondViewController_iPad", null)
 		{
 			fetcher = new Fetcher (this);
-			this.Title = "Klasse";
-			this.TabBarItem.Image = UIImage.FromBundle ("second");
-
+			if (!UserInterfaceIdiomIsPhone) {
+				this.Title = "Klasse";
+				this.TabBarItem.Image = UIImage.FromBundle ("second");
+			}
 		}
 
 		public override void DidReceiveMemoryWarning ()
@@ -63,8 +64,10 @@ namespace vplan
 			}));
 		}
 		public void changeView () {
-			this.TabBarController.SelectedIndex = 0;
-			this.TabBarController.SelectedViewController = TabBarController.ChildViewControllers [0];
+			if (UserInterfaceIdiomIsPhone) {
+				this.TabBarController.SelectedIndex = 0;
+				this.TabBarController.SelectedViewController = TabBarController.ChildViewControllers [0];
+			}
 		}
 		public void refresh(List<Group> v1) {
 			InvokeOnMainThread (new NSAction (delegate {

@@ -15,7 +15,7 @@ namespace vplan
 		}
 
 		public FirstViewController ()
-			: base (UserInterfaceIdiomIsPhone ? "FirstViewController_iPhone" : "FirstViewController_iPad", null)
+			: base ("FirstViewController_iPad", null)
 		{
 
 			this.Title = "Vertretungen";
@@ -50,8 +50,10 @@ namespace vplan
 				}
 			}
 			catch {
-				this.TabBarController.SelectedIndex = 1;
-				this.TabBarController.SelectedViewController = TabBarController.ChildViewControllers [1];
+				if (UserInterfaceIdiomIsPhone) {
+					this.TabBarController.SelectedIndex = 1;
+					this.TabBarController.SelectedViewController = TabBarController.ChildViewControllers [1];
+				}
 			}
 		}
 		public void reload(int _group) {

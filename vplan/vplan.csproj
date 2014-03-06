@@ -111,6 +111,7 @@
     <Compile Include="vplan.Kit\Group.cs" />
     <Compile Include="vplan.Kit\TableSource.cs" />
     <Compile Include="vplan.Kit\GroupTableSource.cs" />
+    <Compile Include="SplitView.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="FirstViewController_iPhone.xib" />

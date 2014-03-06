@@ -15,6 +15,7 @@ namespace vplan
 		// class-level declarations
 		UIWindow window;
 		UITabBarController tabBarController;
+		UISplitViewController splitViewController;
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this
 		// method you should instantiate the window, load the UI into it and then make the window
@@ -27,18 +28,22 @@ namespace vplan
 			// create a new window instance based on the screen size
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 			window.AutosizesSubviews = true;
-			
 
-			var viewController2 = new SecondViewController ();
-			var viewController1 = new FirstViewController ();
 
-			tabBarController = new UITabBarController ();
-			tabBarController.ViewControllers = new UIViewController [] {
-				viewController1,
-				viewController2,
-			};
+			if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
+				tabBarController = new UITabBarController ();
+				var viewController2 = new SecondViewController ();
+				var viewController1 = new FirstViewController ();
+				tabBarController.ViewControllers = new UIViewController [] {
+					viewController1,
+					viewController2,
+				};
 			
-			window.RootViewController = tabBarController;
+				window.RootViewController = tabBarController;
+			} else {
+				splitViewController = new SplitView ();
+				window.RootViewController = splitViewController;
+			}
 			window.MakeKeyAndVisible ();
 			
 			return true;
