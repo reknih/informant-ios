@@ -164,15 +164,21 @@ namespace vplan
                 case "KU":
                     fach = "Kunst";
                     break;
-                case "INFO":
+				case "IN":
                     fach = "Informatik";
                     break;
-                case "LA":
-                    fach = "Latein";
-                    break;
-                case "LA2":
-                    fach = "Latein";
-                    break;
+				case "LA":
+					fach = "Latein";
+					break;
+				case "LA2":
+					fach = "Latein";
+					break;
+				case "IT":
+					fach = "Italiensich";
+					break;
+				case "WU":
+					fach = "Wahlunterricht";
+					break;
             }
             return fach;
         }
@@ -188,10 +194,15 @@ namespace vplan
         public string Notiz { get; set; }
 
         public string Raum { get; set; }
+
         public string EntfallStr { get; set; }
+
         public bool Entfall { get; set; }
+
         public string MitbeStr { get; set; }
+
         public bool Mitbetreung { get; set; }
+
         public bool Veranstaltung { get; set; }
 
         public string Line1 { get; set; }

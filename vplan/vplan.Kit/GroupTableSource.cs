@@ -54,11 +54,11 @@ namespace vplan
 		}
 		public override bool CanEditRow (UITableView tableView, NSIndexPath indexPath)
 		{
-			return true; // return false if you wish to disable editing for a specific indexPath or for all rows
+			return false; // return false if you wish to disable editing for a specific indexPath or for all rows
 		}
 		public override bool CanMoveRow (UITableView tableView, NSIndexPath indexPath)
 		{
-			return true; // return false if you don't allow re-ordering
+			return false; // return false if you don't allow re-ordering
 		}
 		public override UITableViewCellEditingStyle EditingStyleForRow (UITableView tableView, NSIndexPath indexPath)
 		{
