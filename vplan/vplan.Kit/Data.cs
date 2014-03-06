@@ -19,6 +19,22 @@ namespace vplan
             Line2 = "";
             Head = true;
         }
+		public Data(string std, string fach, string lehr, string vertr, string raum, string notiz)
+		{
+			Fach = fach;
+			Lehrer = lehr;
+			Vertreter = vertr;
+			Stunde = std;
+			Raum = raum;
+			Notiz = notiz;
+			refresh();
+		}
+		public Data(string head)
+		{
+			Head = true;
+			Line1 = head;
+			Line2 = "";
+		}
         public void refresh()
         {
             Head = false;
@@ -49,7 +65,7 @@ namespace vplan
             }
             else if (Mitbetreung == true)
             {
-                Line2 = Fach + " wird durch " + Vertreter + " mitbetreut. | " + Raum;
+				Line2 = Fach + " bei " + Lehrer + " wird durch " + Vertreter + " mitbetreut. | " + Raum;
             }
             else if (Veranstaltung == true)
             {
@@ -78,16 +94,6 @@ namespace vplan
             {
                 Line2 = Notiz + "; " + Line2;
             }
-        }
-        public Data(string std, string fach, string lehr, string vertr, string raum, string notiz)
-        {
-            Fach = fach;
-            Lehrer = lehr;
-            Vertreter = vertr;
-            Stunde = std;
-            Raum = raum;
-            Notiz = notiz;
-            refresh();
         }
         private string faecherSchreib(string fach)
         {

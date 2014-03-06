@@ -15,7 +15,7 @@ namespace vplan
 		}
 
 		public FirstViewController ()
-			: base ("FirstViewController_iPad", null)
+			: base (UserInterfaceIdiomIsPhone ? "FirstViewController_iPhone" : "FirstViewController_iPad", null)
 		{
 
 			this.Title = "Vertretungen";
@@ -53,10 +53,17 @@ namespace vplan
 				if (UserInterfaceIdiomIsPhone) {
 					this.TabBarController.SelectedIndex = 1;
 					this.TabBarController.SelectedViewController = TabBarController.ChildViewControllers [1];
+				} else {
+					spinnner.StopAnimating ();
+					var li = new List<Data> ();
+					li.Add (new Data("Hallo! Wähle eine Klasse, um zu starten."));
+					table.Source = new TableSource (li);
+					table.ReloadData ();
 				}
 			}
 		}
 		public void reload(int _group) {
+			spinnner.StartAnimating ();
 			fetcher.getTimes(_group, false);
 		}
 		public void add(Data v1) {

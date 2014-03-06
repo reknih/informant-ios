@@ -34,6 +34,9 @@ namespace vplan
 			store.Synchronize ();
 			tableView.DeselectRow (indexPath, true); // normal iOS behaviour is to remove the blue highlight
 			_sv.changeView ();
+			if (UIDevice.CurrentDevice.UserInterfaceIdiom != UIUserInterfaceIdiom.Phone) {
+				_sv.goToUpdate (indexPath.Row + 1);
+			}
 		}
 		public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, MonoTouch.Foundation.NSIndexPath indexPath)
 		{

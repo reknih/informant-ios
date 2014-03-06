@@ -29,7 +29,6 @@ namespace vplan
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 			window.AutosizesSubviews = true;
 
-
 			if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
 				tabBarController = new UITabBarController ();
 				var viewController2 = new SecondViewController ();

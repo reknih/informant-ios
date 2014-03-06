@@ -18,7 +18,7 @@ namespace vplan
 			: base (UserInterfaceIdiomIsPhone ? "SecondViewController_iPhone" : "SecondViewController_iPad", null)
 		{
 			fetcher = new Fetcher (this);
-			if (!UserInterfaceIdiomIsPhone) {
+			if (UserInterfaceIdiomIsPhone) {
 				this.Title = "Klasse";
 				this.TabBarItem.Image = UIImage.FromBundle ("second");
 			}
@@ -68,6 +68,10 @@ namespace vplan
 				this.TabBarController.SelectedIndex = 0;
 				this.TabBarController.SelectedViewController = TabBarController.ChildViewControllers [0];
 			}
+		}
+		public void goToUpdate (int group) {
+			SplitView sv = (SplitView)SplitViewController;
+			sv.updateDetails (group);
 		}
 		public void refresh(List<Group> v1) {
 			InvokeOnMainThread (new NSAction (delegate {

@@ -111,13 +111,13 @@
     <Compile Include="vplan.Kit\Group.cs" />
     <Compile Include="vplan.Kit\TableSource.cs" />
     <Compile Include="vplan.Kit\GroupTableSource.cs" />
-    <Compile Include="SplitView.cs" />
+    <Compile Include="vplan.Kit\SplitView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="FirstViewController_iPhone.xib" />
     <InterfaceDefinition Include="FirstViewController_iPad.xib" />
     <InterfaceDefinition Include="SecondViewController_iPhone.xib" />
     <InterfaceDefinition Include="SecondViewController_iPad.xib" />
+    <InterfaceDefinition Include="FirstViewController_iPhone.xib" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\first.png" />
