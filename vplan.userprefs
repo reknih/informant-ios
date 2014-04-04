@@ -1,15 +1,12 @@
 ﻿<Properties GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPad.7.0" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="vplan/vplan.Kit/GroupTableSource.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="AppStore|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.Hartmut’s iPhone 4" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="vplan/vplan.Kit/Fetcher.cs">
     <Files>
-      <File FileName="vplan/FirstViewController.cs" Line="42" Column="34" />
-      <File FileName="vplan/SecondViewController.cs" Line="21" Column="8" />
-      <File FileName="vplan/vplan.Kit/Data.cs" Line="203" Column="3" />
-      <File FileName="vplan/vplan.Kit/SplitView.cs" Line="6" Column="5" />
-      <File FileName="vplan/vplan.Kit/GroupTableSource.cs" Line="60" Column="4" />
-      <File FileName="vplan/AppDelegate.cs" Line="36" Column="32" />
-      <File FileName="vplan/vplan.Kit/Fetcher.cs" Line="119" Column="1" />
-      <File FileName="vplan/Info.plist" />
+      <File FileName="vplan/vplan.Kit/Data.cs" Line="1" Column="1" />
+      <File FileName="vplan/vplan.Kit/Fetcher.cs" Line="64" Column="18" />
+      <File FileName="vplan/vplan.Kit/TableSource.cs" Line="42" Column="10" />
+      <File FileName="vplan/vplan.Kit/GroupTableSource.cs" Line="1" Column="1" />
+      <File FileName="vplan/SecondViewController.cs" Line="30" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -23,7 +23,11 @@ namespace vplan
 				this.TabBarItem.Image = UIImage.FromBundle ("second");
 			}
 		}
-
+		public void Alert (string title, string text, string btn) {
+			InvokeOnMainThread (new NSAction (delegate {
+				new UIAlertView (title, text, null, btn, null).Show ();
+			}));
+		}
 		public override void DidReceiveMemoryWarning ()
 		{
 			// Releases the view if it doesn't have a superview.
