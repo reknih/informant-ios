@@ -32,7 +32,7 @@ namespace vplan
 			var store = NSUbiquitousKeyValueStore.DefaultStore;
 			store.SetDouble ("group", (double)indexPath.Row + 1);
 			store.Synchronize ();
-			tableView.DeselectRow (indexPath, true); // normal iOS behaviour is to remove the blue highlight
+			tableView.DeselectRow (indexPath, true); // normal iOS behaviour is to remove the grey-ish highlight
 			_sv.changeView ();
 			if (UIDevice.CurrentDevice.UserInterfaceIdiom != UIUserInterfaceIdiom.Phone) {
 				_sv.goToUpdate (indexPath.Row + 1);

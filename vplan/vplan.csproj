@@ -82,8 +82,11 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <CodesignProvision>0777D92B-659D-4A3F-8283-4BD98CE5CD70</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -112,6 +115,7 @@
     <Compile Include="vplan.Kit\TableSource.cs" />
     <Compile Include="vplan.Kit\GroupTableSource.cs" />
     <Compile Include="vplan.Kit\SplitView.cs" />
+    <Compile Include="vplan.Kit\Igno.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="FirstViewController_iPad.xib" />
