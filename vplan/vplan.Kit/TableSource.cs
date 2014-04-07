@@ -36,6 +36,23 @@ namespace vplan
 			switch (editingStyle) {
 			case UITableViewCellEditingStyle.Delete:
 				// remove the item from the underlying data source
+				string del = tableItems [indexPath.Row].AltFach + "%" + tableItems [indexPath.Row].Lehrer;
+				int there;
+				var store = NSUbiquitousKeyValueStore.DefaultStore;
+				try {
+					there = (int)store.GetDouble ("ignoredCount");
+					if (there == 0) {
+						throw new Exception ();
+					}
+				} catch {
+					store.SetDouble ("ignoredCount", 0);
+					there = 0;
+				}
+				there++;
+				store.SetString ("ignored" + Convert.ToString(there), del);
+				store.SetDouble ("ignoredCount", there);
+				Console.WriteLine("Written " + del + " for index " + Convert.ToString(there) + " to iCloud.");
+				store.Synchronize ();
 				tableItems.RemoveAt(indexPath.Row);
 				// delete the row from the table
 				tableView.DeleteRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Fade);

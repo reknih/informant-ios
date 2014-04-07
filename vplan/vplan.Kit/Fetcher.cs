@@ -6,8 +6,9 @@ using System.Text;
 using System.Net;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using MonoTouch.UIKit;
+using System.Drawing;
 using MonoTouch.Foundation;
+using MonoTouch.UIKit;
 
 namespace vplan
 {
@@ -44,11 +45,10 @@ namespace vplan
                 List<Group> groupObj = new List<Group>();
                 if (e.Error != null)
                 {
-                    if (silent != true)
-                    {
-						new UIAlertView("Och nö.", "Komm nochmal, wenn du wieder Internet hast.", null, "Ich bin vielbeschäftigt.", null).Show();
-                    }
-                    return;
+					if (silent != true) {
+						sp.Alert ("Dumm, dumm, dumm.", "Wir haben keine Verbndung zum Internet. Die brauchst du aber jetzt.", "Ich komme wieder!");
+					}
+					return;
                 }
                 string raw = e.Result.Replace(" ", string.Empty);
                 raw = raw.Substring(raw.IndexOf("varclasses=[") + "varclasses=[".Length);
@@ -75,11 +75,11 @@ namespace vplan
             webcl = new WebClient();
             Group = group;
             if (follow == true) {
-                webcl.DownloadStringCompleted += new DownloadStringCompletedEventHandler(timesNext_DownloadStringCompleted);
+				webcl.DownloadStringCompleted += new DownloadStringCompletedEventHandler(timesNext_DownloadStringCompleted);
             }
             else
             {
-                webcl.DownloadStringCompleted += new DownloadStringCompletedEventHandler(times_DownloadStringCompleted);
+				webcl.DownloadStringCompleted += new DownloadStringCompletedEventHandler(times_DownloadStringCompleted);
             }
             string groupStr = "";
             string weekStr = "";
@@ -116,14 +116,17 @@ namespace vplan
             {
 				weekStr = Convert.ToString(week);
             }
-            webcl.DownloadStringAsync(new Uri("http://www.cws-usingen.de/stupla/Schueler/" + weekStr + "/w/" + groupStr + ".htm"));
+			webcl.DownloadStringAsync (new Uri ("http://www.cws-usingen.de/stupla/Schueler/" + weekStr + "/w/" + groupStr + ".htm"));
         }
         private void times_DownloadStringCompleted(object send, DownloadStringCompletedEventArgs e)
         {
             if (e.Error != null)
             {
-                if (silent != true)
-					new UIAlertView("Aslack-Provider!.", "Wir haben keine verbndung zum Internet.", null, "Huuurra.", null).Show();
+				if (silent != true) {
+					if (mp != null) {
+						mp.Alert ("Aslack-Provider!.", "Wir haben keine Verbndung zum Internet.", "Huuurra.");
+					}
+				}
                 return;
             }
             //TO-DO: Parse VPlan
@@ -252,7 +255,7 @@ namespace vplan
                 //TO-DO: Parse VPlan
                 string[] raw = new string[] { "", "", "", "", "" };
                 string comp = e.Result;
-                comp.Replace(" ", string.Empty);
+				comp = comp.Replace(" ", string.Empty);
                 for (int i = 0; i < 5; i++)
                 {
                     raw[i] = comp.Substring(comp.IndexOf("<table"), comp.IndexOf("</table>") - comp.IndexOf("<table") + 8);
@@ -269,7 +272,7 @@ namespace vplan
                         it = item.Replace("&nbsp;", String.Empty);
                         Regex regex = new Regex("<t{1}d{1}.*?>.*?</td>");
                         MatchCollection mc;
-                        if (item.IndexOf("Keine Vertretungen") == -1)
+                        if (item.IndexOf("KeineVertretungen") == -1)
                         {
                             int i = 0;
                             while (it.IndexOf("<trclass='list") != -1)
@@ -352,8 +355,8 @@ namespace vplan
                 }
             }
             catch {
-				if (silent != true) {
-					new UIAlertView("Da ist was schiefgelaufen.", "Die Vertretungen für die nächste Woche werden evtl. nicht angezeigt.", null, "Find ich auch scheiße", null).Show();
+				if (silent != true && mp != null) {
+					mp.Alert ("Da ist was schiefgelaufen.", "Die Vertretungen für die nächste Woche werden evtl. nicht angezeigt.", "Find ich auch scheiße");
 				}
             }
         }

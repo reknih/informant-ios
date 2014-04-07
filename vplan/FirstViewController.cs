@@ -9,7 +9,9 @@ namespace vplan
 	public partial class FirstViewController : UIViewController
 	{
 		List<Data> ti;
+		List<Igno> ili;
 		Fetcher fetcher;
+		NSUbiquitousKeyValueStore store = NSUbiquitousKeyValueStore.DefaultStore;
 		static bool UserInterfaceIdiomIsPhone {
 			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
 		}
@@ -22,6 +24,7 @@ namespace vplan
 			this.TabBarItem.Image = UIImage.FromBundle ("first");
 			fetcher = new Fetcher (this);
 			ti = new List<Data> ();
+			ili = new List<Igno> ();
 		}
 
 		public override void DidReceiveMemoryWarning ()
@@ -37,10 +40,24 @@ namespace vplan
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
 		}
+		public void Alert (string title, string text, string btn) {
+			InvokeOnMainThread (new NSAction (delegate {
+				new UIAlertView (title, text, null, btn, null).Show ();
+			}));
+		}
 		public override void ViewDidAppear(bool an) {
 			base.ViewDidAppear (an);
-			var store = NSUbiquitousKeyValueStore.DefaultStore;
 			int group;
+			try {
+				int igC = (int)store.GetDouble ("ignoredCount");
+				try {
+					for (int i = igC; i > 0; i--) {
+						string igKey = "ignored"+ Convert.ToString(i);
+						string value = store.GetString(igKey);
+						ili.Add(new Igno(value));
+					}
+				} catch {}
+			} catch {}
 			try {
 				group = (int)store.GetDouble ("group");
 				if (group == 0) {
@@ -68,21 +85,27 @@ namespace vplan
 		}
 		public void add(Data v1) {
 			InvokeOnMainThread (new NSAction (delegate {
-				spinnner.StopAnimating ();
-				ti.Add (v1);
-				List<Data> _ti = ti;
-				if (_ti.Count == 0) {
-					_ti.Add(new Data());
-				}
-				if (table == null) {
-					table = new UITableView (View.Bounds);
-					table.AutoresizingMask = UIViewAutoresizing.All;
-					table.Source = new TableSource (_ti);
-					Add (table);
-				} else {
-					table.Source = new TableSource (_ti);
-					table.ReloadData();
-				}
+				try {
+					ili.ForEach (delegate (Igno curr) {
+						if (curr.Fach == v1.AltFach && curr.Lehrer == v1.Lehrer)
+							throw new Exception();
+					});
+					spinnner.StopAnimating ();
+					ti.Add (v1);
+					List<Data> _ti = ti;
+					if (_ti.Count == 0) {
+						_ti.Add(new Data());
+					}
+					if (table == null) {
+						table = new UITableView (View.Bounds);
+						table.AutoresizingMask = UIViewAutoresizing.All;
+						table.Source = new TableSource (_ti);
+						Add (table);
+					} else {
+						table.Source = new TableSource (_ti);
+						table.ReloadData();
+						}
+				} catch {} 
 			}));
 		}
 		public void clear() {
@@ -95,6 +118,15 @@ namespace vplan
 		}
 		public void refresh(List<Data> v1) {
 			InvokeOnMainThread (new NSAction (delegate {
+				for (int i = v1.Count - 1; i >= 0; i--)
+				{
+					ili.ForEach (delegate (Igno curr) {
+						try{
+						if (curr.Fach == v1[i].AltFach && curr.Lehrer == v1[i].Lehrer)
+							v1.RemoveAt(i);
+						} catch {}
+					});
+				}
 				spinnner.StopAnimating ();
 				List<Data> _ti = v1;
 				if (_ti.Count == 0) {
