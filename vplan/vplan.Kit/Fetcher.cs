@@ -130,11 +130,16 @@ namespace vplan
                 return;
             }
             //TO-DO: Parse VPlan
-            string[] raw = new string[] { "", "", "", "", "" };
+			int stringcnt = 5;
             string comp = e.Result;
             comp = comp.Replace(" ", string.Empty);
 			mp.clear ();
-            for (int i = 0; i < 5; i++)
+			string haystack = comp;
+			string needle = "NachrichtenzumTag";
+			int needleCount = (haystack.Length - comp.Replace (needle, "").Length) / needle.Length;
+			stringcnt = stringcnt + needleCount;
+			string[] raw = new string[stringcnt];
+			for (int i = 0; i < stringcnt; i++)
             {
                 raw[i] = comp.Substring(comp.IndexOf("<table"), comp.IndexOf("</table>") - comp.IndexOf("<table") + 8);
                 comp = comp.Substring(comp.IndexOf("</table>") + 8);
@@ -253,10 +258,15 @@ namespace vplan
                 if (e.Error != null)
                     return;
                 //TO-DO: Parse VPlan
-                string[] raw = new string[] { "", "", "", "", "" };
-                string comp = e.Result;
+				int stringcnt = 5;
+				string comp = e.Result;
 				comp = comp.Replace(" ", string.Empty);
-                for (int i = 0; i < 5; i++)
+				string haystack = comp;
+				string needle = "NachrichtenzumTag";
+				int needleCount = (haystack.Length - comp.Replace (needle, "").Length) / needle.Length;
+				stringcnt = stringcnt + needleCount;
+				string[] raw = new string[stringcnt];
+				for (int i = 0; i < stringcnt; i++)
                 {
                     raw[i] = comp.Substring(comp.IndexOf("<table"), comp.IndexOf("</table>") - comp.IndexOf("<table") + 8);
                     comp = comp.Substring(comp.IndexOf("</table>") + 8);
