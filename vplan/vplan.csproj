@@ -109,9 +109,6 @@
     <Compile Include="SecondViewController.designer.cs">
       <DependentUpon>SecondViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="vplan.Kit\Data.cs" />
-    <Compile Include="vplan.Kit\Fetcher.cs" />
-    <Compile Include="vplan.Kit\Group.cs" />
     <Compile Include="vplan.Kit\TableSource.cs" />
     <Compile Include="vplan.Kit\GroupTableSource.cs" />
     <Compile Include="vplan.Kit\SplitView.cs" />
@@ -151,5 +148,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="vplan.Kit\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\informant-core\informant-core\UntisExport.csproj">
+      <Project>{7E2DE76A-BF93-4B36-9223-D996F1C746CD}</Project>
+      <Name>UntisExport</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

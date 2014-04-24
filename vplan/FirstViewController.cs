@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using UntisExp;
 
 namespace vplan
 {
@@ -22,7 +23,7 @@ namespace vplan
 
 			this.Title = "Vertretungen";
 			this.TabBarItem.Image = UIImage.FromBundle ("first");
-			fetcher = new Fetcher (this);
+			fetcher = new Fetcher (clear, Alert, refresh, add);
 			ti = new List<Data> ();
 			ili = new List<Igno> ();
 		}
