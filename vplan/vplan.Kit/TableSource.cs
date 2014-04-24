@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+using UntisExp;
 
 namespace vplan
 {
