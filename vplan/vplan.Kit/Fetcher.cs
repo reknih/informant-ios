@@ -124,7 +124,7 @@ namespace vplan
             {
 				if (silent != true) {
 					if (mp != null) {
-						mp.Alert ("Aslack-Provider!.", "Wir haben keine Verbndung zum Internet.", "Huuurra.");
+						mp.Alert ("Aslack-Provider!.", "Wir haben keine Verbndung zum Internet oder der Vertretungsplan der neuen Woche ist nicht verfügbar.", "Huuurra.");
 					}
 				}
                 return;
