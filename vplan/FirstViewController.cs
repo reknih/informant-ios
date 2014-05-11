@@ -43,11 +43,13 @@ namespace vplan
 		}
 		public void Alert (string title, string text, string btn) {
 			InvokeOnMainThread (new NSAction (delegate {
+				spinnner.StopAnimating();
 				new UIAlertView (title, text, null, btn, null).Show ();
 			}));
 		}
 		public override void ViewDidAppear(bool an) {
 			base.ViewDidAppear (an);
+			spinnner.StartAnimating ();
 			int group;
 			try {
 				int igC = (int)store.GetDouble ("ignoredCount");
