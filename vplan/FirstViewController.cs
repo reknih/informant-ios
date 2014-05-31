@@ -12,7 +12,7 @@ namespace vplan
 		List<Data> ti;
 		List<Igno> ili;
 		Fetcher fetcher;
-		NSUbiquitousKeyValueStore store = NSUbiquitousKeyValueStore.DefaultStore;
+		PrefManager pm = new PrefManager ();
 		static bool UserInterfaceIdiomIsPhone {
 			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
 		}
@@ -52,17 +52,17 @@ namespace vplan
 			spinnner.StartAnimating ();
 			int group;
 			try {
-				int igC = (int)store.GetDouble ("ignoredCount");
+				int igC = pm.getInt ("ignoredCount");
 				try {
 					for (int i = igC; i > 0; i--) {
 						string igKey = "ignored"+ Convert.ToString(i);
-						string value = store.GetString(igKey);
+						string value = pm.getString(igKey);
 						ili.Add(new Igno(value));
 					}
 				} catch {}
 			} catch {}
 			try {
-				group = (int)store.GetDouble ("group");
+				group = pm.getInt ("group");
 				if (group == 0) {
 					throw new Exception();
 				} else {

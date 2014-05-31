@@ -18,7 +18,8 @@ namespace vplan
 		UITabBarController tabBarController;
 		UISplitViewController splitViewController;
 		Action<UIBackgroundFetchResult> completionHandler;
-		NSUbiquitousKeyValueStore store = NSUbiquitousKeyValueStore.DefaultStore;
+		PrefManager pm = new PrefManager ();
+		NSUserDefaults nu = new NSUserDefaults();
 		List<Data> l;
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this
@@ -55,11 +56,25 @@ namespace vplan
 		}
 		public override void PerformFetch (UIApplication application, Action<UIBackgroundFetchResult> _completionHandler)
 		{
+			int mode;
+			try {
+				nu.Synchronize();
+				if (nu.BoolForKey ("backgrounding") == false) {
+					_completionHandler (UIBackgroundFetchResult.NoData);
+					return;
+				}
+			} catch {
+			}
+			try {
+				mode = (int)nu.IntForKey("bgMode");
+			} catch {
+				mode = 0;
+			}
 			completionHandler = _completionHandler;
-			Fetcher fetcher = new Fetcher (Alert, Refresh, 0);
+			Fetcher fetcher = new Fetcher (Alert, Refresh, mode);
 			int group;
 			try {
-				group = (int)store.GetDouble ("group");
+				group = pm.getInt ("group");
 				if (group == 0) {
 					throw new Exception();
 				} else {
@@ -84,8 +99,27 @@ namespace vplan
 		}
 		protected void finish () {
 			InvokeOnMainThread (new NSAction (delegate {
-				NSUserDefaults nu = new NSUserDefaults();
+				var ili = new List<Igno>();
 				try {
+					int igC = pm.getInt ("ignoredCount");
+					try {
+						for (int i = igC; i > 0; i--) {
+							string igKey = "ignored"+ Convert.ToString(i);
+							string value = pm.getString(igKey);
+							ili.Add(new Igno(value));
+						}
+					} catch {}
+				} catch {}
+				try {
+					for (int i = l.Count - 1; i >= 0; i--)
+					{
+						ili.ForEach (delegate (Igno curr) {
+							try{
+								if (curr.Fach == l[i].AltFach && curr.Lehrer == l[i].Lehrer)
+									l.RemoveAt(i);
+							} catch {}
+						});
+					}
 					if (l.Count == 0) {
 						UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
 						if (nu.IntForKey("oldVal")==l.Count) {
