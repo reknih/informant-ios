@@ -37,23 +37,26 @@ namespace vplan
 			switch (editingStyle) {
 			case UITableViewCellEditingStyle.Delete:
 				// remove the item from the underlying data source
-				string del = tableItems [indexPath.Row].AltFach + "%" + tableItems [indexPath.Row].Lehrer;
+				string del;
+				if (tableItems [indexPath.Row].AltFach != "" && tableItems [indexPath.Row].Lehrer != "") {
+					del = tableItems [indexPath.Row].AltFach + "%" + tableItems [indexPath.Row].Lehrer;
+				} else {
+					del = tableItems [indexPath.Row].Fach + "%" + tableItems [indexPath.Row].Vertreter;
+				}
 				int there;
-				var store = NSUbiquitousKeyValueStore.DefaultStore;
+				var pm = new PrefManager ();
 				try {
-					there = (int)store.GetDouble ("ignoredCount");
+					there = pm.getInt ("ignoredCount");
 					if (there == 0) {
 						throw new Exception ();
 					}
 				} catch {
-					store.SetDouble ("ignoredCount", 0);
+					pm.setInt ("ignoredCount", 0);
 					there = 0;
 				}
 				there++;
-				store.SetString ("ignored" + Convert.ToString(there), del);
-				store.SetDouble ("ignoredCount", there);
-				Console.WriteLine("Written " + del + " for index " + Convert.ToString(there) + " to iCloud.");
-				store.Synchronize ();
+				pm.setString ("ignored" + Convert.ToString(there), del);
+				pm.setInt ("ignoredCount", there);
 				tableItems.RemoveAt(indexPath.Row);
 				// delete the row from the table
 				tableView.DeleteRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Fade);
@@ -72,7 +75,13 @@ namespace vplan
 		}
 		public override string TitleForDeleteConfirmation (UITableView tableView, NSIndexPath indexPath)
 		{   // Optional - default text is 'Delete'
-			return "Ignoriere " + tableItems[indexPath.Row].AltFach + " bei " + tableItems[indexPath.Row].Lehrer;
+			string r;
+			if (tableItems [indexPath.Row].AltFach != "" && tableItems [indexPath.Row].Lehrer != "") {
+				r = "Ignoriere " + tableItems [indexPath.Row].AltFach + " bei " + tableItems [indexPath.Row].Lehrer;
+			} else {
+				r = "Ignoriere " + tableItems [indexPath.Row].Fach + " bei " + tableItems [indexPath.Row].Vertreter;			
+			}
+			return r;
 		}
 		public override bool CanMoveRow (UITableView tableView, NSIndexPath indexPath)
 		{

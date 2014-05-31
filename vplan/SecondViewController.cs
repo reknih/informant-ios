@@ -42,6 +42,7 @@ namespace vplan
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			spinner.StartAnimating ();
 			fetcher.getClasses();
 			// Perform any additional setup after loading the view, typically from a nib.
 		}

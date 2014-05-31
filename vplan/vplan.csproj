@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DA614ABD-218D-4A8A-98E0-6CC8977AAD48}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -113,6 +113,7 @@
     <Compile Include="vplan.Kit\GroupTableSource.cs" />
     <Compile Include="vplan.Kit\SplitView.cs" />
     <Compile Include="vplan.Kit\Igno.cs" />
+    <Compile Include="vplan.Kit\PrefManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="FirstViewController_iPad.xib" />
@@ -131,6 +132,11 @@
     <BundleResource Include="Resources\Default-Portrait%402x.png" />
     <BundleResource Include="Resources\Default-Landscape%402x.png" />
     <BundleResource Include="Resources\Default-Landscape.png" />
+    <BundleResource Include="Resources\Images.xcassets\AppIcon.appiconset\Contents.json" />
+    <BundleResource Include="Resources\Images.xcassets\LaunchImage.launchimage\Contents.json" />
+    <BundleResource Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-568h%402x.png" />
+    <BundleResource Include="Resources\Images.xcassets\LaunchImage.launchimage\Default%402x.png" />
+    <BundleResource Include="Settings.bundle\Root.plist" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -148,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="vplan.Kit\" />
+    <Folder Include="Settings.bundle\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\informant-core\informant-core\UntisExport.csproj">
