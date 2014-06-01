@@ -3,13 +3,14 @@ using System.Drawing;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using UntisExp;
 
 namespace vplan
 {
 	public partial class SecondViewController : UIViewController
 	{
 		List<Group> ti;
-		Fetcher fetcher = new Fetcher ();
+		Fetcher fetcher;
 		static bool UserInterfaceIdiomIsPhone {
 			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
 		}
@@ -17,7 +18,7 @@ namespace vplan
 		public SecondViewController ()
 			: base (UserInterfaceIdiomIsPhone ? "SecondViewController_iPhone" : "SecondViewController_iPad", null)
 		{
-			fetcher = new Fetcher (this);
+			fetcher = new Fetcher (Alert, refresh);
 			if (UserInterfaceIdiomIsPhone) {
 				this.Title = "Klasse";
 				this.TabBarItem.Image = UIImage.FromBundle ("second");
@@ -35,10 +36,13 @@ namespace vplan
 
 			// Release any cached Group, images, etc that aren't in use.
 		}
-
+		public void refresh (List<Data> s) {
+			throw new NotImplementedException ();
+		}
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			spinner.StartAnimating ();
 			fetcher.getClasses();
 			// Perform any additional setup after loading the view, typically from a nib.
 		}

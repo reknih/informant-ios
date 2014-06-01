@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using UntisExp;
 
 namespace vplan
 {
@@ -11,7 +12,7 @@ namespace vplan
 		List<Data> ti;
 		List<Igno> ili;
 		Fetcher fetcher;
-		NSUbiquitousKeyValueStore store = NSUbiquitousKeyValueStore.DefaultStore;
+		PrefManager pm = new PrefManager ();
 		static bool UserInterfaceIdiomIsPhone {
 			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
 		}
@@ -22,7 +23,7 @@ namespace vplan
 
 			this.Title = "Vertretungen";
 			this.TabBarItem.Image = UIImage.FromBundle ("first");
-			fetcher = new Fetcher (this);
+			fetcher = new Fetcher (clear, Alert, refresh, add);
 			ti = new List<Data> ();
 			ili = new List<Igno> ();
 		}
@@ -42,24 +43,26 @@ namespace vplan
 		}
 		public void Alert (string title, string text, string btn) {
 			InvokeOnMainThread (new NSAction (delegate {
+				spinnner.StopAnimating();
 				new UIAlertView (title, text, null, btn, null).Show ();
 			}));
 		}
 		public override void ViewDidAppear(bool an) {
 			base.ViewDidAppear (an);
+			spinnner.StartAnimating ();
 			int group;
 			try {
-				int igC = (int)store.GetDouble ("ignoredCount");
+				int igC = pm.getInt ("ignoredCount");
 				try {
 					for (int i = igC; i > 0; i--) {
 						string igKey = "ignored"+ Convert.ToString(i);
-						string value = store.GetString(igKey);
+						string value = pm.getString(igKey);
 						ili.Add(new Igno(value));
 					}
 				} catch {}
 			} catch {}
 			try {
-				group = (int)store.GetDouble ("group");
+				group = pm.getInt ("group");
 				if (group == 0) {
 					throw new Exception();
 				} else {

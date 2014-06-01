@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+using UntisExp;
 
 namespace vplan
 {
@@ -29,9 +30,8 @@ namespace vplan
 		}
 		public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 		{
-			var store = NSUbiquitousKeyValueStore.DefaultStore;
-			store.SetDouble ("group", (double)indexPath.Row + 1);
-			store.Synchronize ();
+			var pm = new PrefManager ();
+			pm.setInt ("group", indexPath.Row + 1);
 			tableView.DeselectRow (indexPath, true); // normal iOS behaviour is to remove the grey-ish highlight
 			_sv.changeView ();
 			if (UIDevice.CurrentDevice.UserInterfaceIdiom != UIUserInterfaceIdiom.Phone) {
