@@ -115,6 +115,7 @@
     <Compile Include="vplan.Kit\SplitView.cs" />
     <Compile Include="vplan.Kit\Igno.cs" />
     <Compile Include="vplan.Kit\PrefManager.cs" />
+    <Compile Include="vplan.Kit\NewsTableSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="FirstViewController_iPad.xib" />

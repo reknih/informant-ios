@@ -40,8 +40,10 @@ namespace vplan
 				tabBarController = new UITabBarController ();
 				var viewController2 = new SecondViewController ();
 				var viewController1 = new FirstViewController ();
+				var viewController3 = new FirstViewController (true);
 				tabBarController.ViewControllers = new UIViewController [] {
 					viewController1,
+					viewController3,
 					viewController2,
 				};
 			

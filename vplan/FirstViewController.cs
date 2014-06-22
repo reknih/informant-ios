@@ -12,7 +12,9 @@ namespace vplan
 		List<Data> ti;
 		List<Igno> ili;
 		Fetcher fetcher;
+		Press press;
 		PrefManager pm = new PrefManager ();
+		bool isNews;
 		static bool UserInterfaceIdiomIsPhone {
 			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
 		}
@@ -26,6 +28,16 @@ namespace vplan
 			fetcher = new Fetcher (clear, Alert, refresh, add);
 			ti = new List<Data> ();
 			ili = new List<Igno> ();
+			isNews = false;
+		}
+		public FirstViewController (bool _a)
+			: base (UserInterfaceIdiomIsPhone ? "FirstViewController_iPhone" : "FirstViewController_iPad", null)
+		{
+
+			this.Title = "Nachrichten";
+			this.TabBarItem.Image = UIImage.FromBundle ("first");
+			press = new Press ();
+			isNews = true;
 		}
 
 		public override void DidReceiveMemoryWarning ()
@@ -41,15 +53,44 @@ namespace vplan
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
 		}
-		public void Alert (string title, string text, string btn) {
+
+		public void Alert (string title, string text, string btn)
+		{
 			InvokeOnMainThread (new NSAction (delegate {
 				spinnner.StopAnimating();
 				new UIAlertView (title, text, null, btn, null).Show ();
 			}));
 		}
-		public override void ViewDidAppear(bool an) {
+
+		public override void ViewDidAppear(bool an)
+		{
 			base.ViewDidAppear (an);
 			spinnner.StartAnimating ();
+			if (isNews) {
+				InitNews ();
+			} else {
+				InitVplan ();
+			}
+		}
+		protected async void InitNews() 
+		{
+			var news = await press.getNews ();
+			try {
+				if (table == null) {
+					table = new UITableView (View.Bounds);
+					table.AutoresizingMask = UIViewAutoresizing.All;
+					table.Source = new NewsTableSource (news);
+					Add (table);
+				} else {
+					table.Source = new NewsTableSource (news);
+					table.ReloadData();
+				}
+				spinnner.StopAnimating();
+			} catch {
+			}
+		}
+		protected void InitVplan()
+		{
 			int group;
 			try {
 				int igC = pm.getInt ("ignoredCount");
@@ -107,7 +148,7 @@ namespace vplan
 					} else {
 						table.Source = new TableSource (_ti);
 						table.ReloadData();
-						}
+					}
 				} catch {} 
 			}));
 		}
