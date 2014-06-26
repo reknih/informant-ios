@@ -35,7 +35,7 @@ namespace vplan
 		{
 
 			this.Title = "Nachrichten";
-			this.TabBarItem.Image = UIImage.FromBundle ("first");
+			this.TabBarItem.Image = UIImage.FromBundle ("third");
 			press = new Press ();
 			isNews = true;
 		}
@@ -112,8 +112,8 @@ namespace vplan
 			}
 			catch {
 				if (UserInterfaceIdiomIsPhone) {
-					this.TabBarController.SelectedIndex = 1;
-					this.TabBarController.SelectedViewController = TabBarController.ChildViewControllers [1];
+					this.TabBarController.SelectedIndex = 2;
+					this.TabBarController.SelectedViewController = TabBarController.ChildViewControllers [2];
 				} else {
 					spinnner.StopAnimating ();
 					var li = new List<Data> ();
