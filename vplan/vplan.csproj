@@ -11,7 +11,7 @@
     <RootNamespace>vplan</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>vplan</AssemblyName>
-    <ReleaseVersion>1.5</ReleaseVersion>
+    <ReleaseVersion>1.7</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,6 +25,9 @@
     <MtouchLink>None</MtouchLink>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>i386</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
@@ -48,7 +51,10 @@
     <ConsolePause>false</ConsolePause>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Hartmut Haug (6QBAQ7L5W9)</CodesignKey>
+    <CodesignProvision>37F34A11-A084-4D7F-B546-1BDE0F80252E</CodesignProvision>
+    <IpaPackageName>
+    </IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -83,7 +89,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>0777D92B-659D-4A3F-8283-4BD98CE5CD70</CodesignProvision>
+    <CodesignProvision>43D626F6-A698-4284-9EF6-89A56745C409</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <MtouchI18n>
     </MtouchI18n>
@@ -138,6 +144,7 @@
     <BundleResource Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-568h%402x.png" />
     <BundleResource Include="Resources\Images.xcassets\LaunchImage.launchimage\Default%402x.png" />
     <BundleResource Include="Settings.bundle\Root.plist" />
+    <BundleResource Include="Resources\vplan.entitlements" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
