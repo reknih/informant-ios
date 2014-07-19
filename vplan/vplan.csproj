@@ -52,9 +52,9 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer: Hartmut Haug (6QBAQ7L5W9)</CodesignKey>
-    <CodesignProvision>37F34A11-A084-4D7F-B546-1BDE0F80252E</CodesignProvision>
     <IpaPackageName>
     </IpaPackageName>
+    <CodesignProvision>37F34A11-A084-4D7F-B546-1BDE0F80252E</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -103,7 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
-    <None Include="Entitlements.plist" />
+    <None Include="Resources\vplan.entitlements" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -144,6 +144,10 @@
     <BundleResource Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-568h%402x.png" />
     <BundleResource Include="Resources\Images.xcassets\LaunchImage.launchimage\Default%402x.png" />
     <BundleResource Include="Settings.bundle\Root.plist" />
+    <BundleResource Include="Entitlements.plist" />
+    <BundleResource Include="Resources\Entitlements.plist" />
+    <BundleResource Include="Resources\Info.plist" />
+    <BundleResource Include="Resources\Settings.bundle\Root.plist" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -158,6 +162,8 @@
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\iPadSpotlight.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\iPad.png" />
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\iPad%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\iPhoneApp6.png" />
+    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\iPhoneApp6%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="vplan.Kit\" />
