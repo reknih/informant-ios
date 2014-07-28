@@ -10,6 +10,7 @@ namespace vplan
 		NSUbiquitousKeyValueStore store = NSUbiquitousKeyValueStore.DefaultStore;
 		NSUserDefaults locstore = new NSUserDefaults();
 		NSUrl iCloudUrl;
+		bool notified = false;
 		public PrefManager ()
 		{
 			checkICloud ();
@@ -25,13 +26,16 @@ namespace vplan
 				var uburl = NSFileManager.DefaultManager.GetUrlForUbiquityContainer(null);
 				// OR instead of null you can specify "TEAMID.com.xamarin.samples.icloud"
 				if (uburl == null) {
-					using(var pool = new NSAutoreleasePool())
-						pool.InvokeOnMainThread(()=> {
-						var alert = new UIAlertView("Keine i\uE049 verfügbar"
-							, "Deine Klasse wird auf deinem Gerät gespeichert!"
-							, null, "OK", null);
-						alert.Show ();
-					});
+					if (!notified) {
+						using(var pool = new NSAutoreleasePool())
+							pool.InvokeOnMainThread(()=> {
+							var alert = new UIAlertView("Keine i\uE049 verfügbar"
+								, "Deine Klasse wird auf deinem Gerät gespeichert!"
+								, null, "OK", null);
+							alert.Show ();
+						});
+						notified = true;
+					}
 				} else { // iCloud enabled, store the NSURL for later use
 					iCloudUrl = uburl;
 				}
