@@ -17,11 +17,13 @@
       "idiom": "iphone"
     },
     {
+      "filename": "iPhoneApp6.png",
       "size": "57x57",
       "scale": "1x",
       "idiom": "iphone"
     },
     {
+      "filename": "iPhoneApp6@2x.png",
       "size": "57x57",
       "scale": "2x",
       "idiom": "iphone"
@@ -90,5 +92,8 @@
   "info": {
     "version": 1,
     "author": "xcode"
+  },
+  "properties": {
+    "pre-rendered": true
   }
 }

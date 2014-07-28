@@ -42,6 +42,6 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = vplan\vplan.csproj
-		version = 1.5
+		version = 1.7
 	EndGlobalSection
 EndGlobal
