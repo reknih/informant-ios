@@ -26,11 +26,11 @@ namespace vplan
 			fv.reload (group);
 		}
 
-		public override bool ShouldAutorotateToInterfaceOrientation
+		/*public override bool ShouldAutorotateToInterfaceOrientation
 		(UIInterfaceOrientation toInterfaceOrientation)
 		{
 			return true;
-		}
+		}*/
 		class SplitDelegate : UISplitViewControllerDelegate
 		{
 			public override bool ShouldHideViewController (UISplitViewController svc,
