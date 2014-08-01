@@ -32,7 +32,7 @@ namespace vplan
 							var alert = new UIAlertView("Keine i\uE049 verfügbar"
 								, "Deine Klasse wird auf deinem Gerät gespeichert!"
 								, null, "OK", null);
-							alert.Show ();
+							//alert.Show ();
 						});
 						notified = true;
 					}

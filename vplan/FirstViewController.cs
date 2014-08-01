@@ -11,6 +11,7 @@ namespace vplan
 	{
 		List<Data> ti;
 		List<Igno> ili;
+		List<News> globNews;
 		Fetcher fetcher;
 		Press press;
 		PrefManager pm = new PrefManager ();
@@ -75,14 +76,27 @@ namespace vplan
 		protected async void InitNews() 
 		{
 			var news = await press.getNews ();
+			globNews = news;
+			int group;
+			try {
+				group = pm.getInt ("group");
+				if (group == 0) {
+					throw new Exception();
+				} else {
+					fetcher = new Fetcher(addToNewsTable, group, 30);
+				}
+			}
+			catch {
+				fetcher = new Fetcher(addToNewsTable, 5, 30);
+			}
 			try {
 				if (table == null) {
 					table = new UITableView (View.Bounds);
 					table.AutoresizingMask = UIViewAutoresizing.All;
-					table.Source = new NewsTableSource (news);
+					table.Source = new NewsTableSource (globNews);
 					Add (table);
 				} else {
-					table.Source = new NewsTableSource (news);
+					table.Source = new NewsTableSource (globNews);
 					table.ReloadData();
 				}
 				spinnner.StopAnimating();
@@ -107,7 +121,7 @@ namespace vplan
 				if (group == 0) {
 					throw new Exception();
 				} else {
-					fetcher.getTimes(group, false);
+					fetcher.getTimes(group, Activity.ParseFirstSchedule, 30);
 				}
 			}
 			catch {
@@ -125,7 +139,7 @@ namespace vplan
 		}
 		public void reload(int _group) {
 			spinnner.StartAnimating ();
-			fetcher.getTimes(_group, false);
+			fetcher.getTimes(_group, Activity.ParseFirstSchedule, 30);
 		}
 		public void add(Data v1) {
 			InvokeOnMainThread (new NSAction (delegate {
@@ -186,6 +200,20 @@ namespace vplan
 			List<Data> tableItems = new List<Data> ();
 			tableItems.Add (new Data ());
 			table.Source = new TableSource (tableItems);
+		}
+		protected void addToNewsTable (News n) {
+			globNews.Insert (0, n);
+			InvokeOnMainThread (new NSAction (delegate {
+				if (table == null) {
+					table = new UITableView (View.Bounds);
+					table.AutoresizingMask = UIViewAutoresizing.All;
+					table.Source = new NewsTableSource (globNews);
+					Add (table);
+				} else {
+					table.Source = new NewsTableSource (globNews);
+					table.ReloadData ();
+				}
+			}));
 		}
 
 	}
