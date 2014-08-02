@@ -8,10 +8,13 @@ namespace vplan
 {
 	public class NewsTableSource : UITableViewSource {
 		List<News> tableItems;
+		NewsListController lc;
+		public News selected;
 		string cellIdentifier = "TableCell";
-		public NewsTableSource (List<News> items)
+		public NewsTableSource (List<News> items, NewsListController _lc)
 		{
 			tableItems = items;
+			lc = _lc;
 		}
 		public override int RowsInSection (UITableView tableview, int section)
 		{
@@ -30,6 +33,8 @@ namespace vplan
 		}
 		public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 		{
+			selected = tableItems [indexPath.Row];
+			lc.PerformSegue ("NewsItemSegue", this);
 			//new UIAlertView("Row Selected", tableItems[indexPath.Row].Line1, null, "OK", null).Show();
 			tableView.DeselectRow (indexPath, true); // normal iOS behaviour is to remove the blue highlight
 		}

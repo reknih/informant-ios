@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 
 namespace vplan
 {
-	[Register ("FirstViewController")]
-	partial class FirstViewController
+	[Register ("VplanViewController")]
+	partial class VplanViewController
 	{
 		[Outlet]
 		MonoTouch.UIKit.UIActivityIndicatorView spinnner { get; set; }
@@ -20,14 +20,14 @@ namespace vplan
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (spinnner != null) {
-				spinnner.Dispose ();
-				spinnner = null;
-			}
-
 			if (table != null) {
 				table.Dispose ();
 				table = null;
+			}
+
+			if (spinnner != null) {
+				spinnner.Dispose ();
+				spinnner = null;
 			}
 		}
 	}

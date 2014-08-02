@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 
 namespace vplan
 {
-	[Register ("SecondViewController")]
-	partial class SecondViewController
+	[Register ("NewsListController")]
+	partial class NewsListController
 	{
 		[Outlet]
 		MonoTouch.UIKit.UIActivityIndicatorView spinner { get; set; }

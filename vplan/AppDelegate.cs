@@ -20,6 +20,7 @@ namespace vplan
 		Action<UIBackgroundFetchResult> completionHandler;
 		PrefManager pm = new PrefManager ();
 		NSUserDefaults nu = new NSUserDefaults();
+		public static UIStoryboard Storyboard;
 		List<Data> l;
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this
@@ -34,27 +35,20 @@ namespace vplan
 			UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval (UIApplication.BackgroundFetchIntervalMinimum);
 			UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
-			window.AutosizesSubviews = true;
 
-			if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
-				tabBarController = new UITabBarController ();
-				var viewController2 = new SecondViewController ();
-				var viewController1 = new FirstViewController ();
-				var viewController3 = new FirstViewController (true);
-				tabBarController.ViewControllers = new UIViewController [] {
-					viewController1,
-					viewController3,
-					viewController2,
-				};
-			
-				window.RootViewController = tabBarController;
+			if (UserInterfaceIdiomIsPhone) {
+				Storyboard = UIStoryboard.FromName ("MainStoryboard_iPhone", null);
 			} else {
-				splitViewController = new SplitView ();
-				window.RootViewController = splitViewController;
+				Storyboard = UIStoryboard.FromName ("MainStoryboard_iPad", null);
 			}
+
+			var initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
+
+			window.RootViewController = initialViewController;
 			window.MakeKeyAndVisible ();
-			
 			return true;
+			
+
 		}
 		public override void PerformFetch (UIApplication application, Action<UIBackgroundFetchResult> _completionHandler)
 		{
@@ -98,6 +92,10 @@ namespace vplan
 				}
 			}
 			finish ();
+		}
+		public override UIWindow Window {
+			get;
+			set;
 		}
 		protected void finish () {
 			InvokeOnMainThread (new NSAction (delegate {
@@ -164,6 +162,10 @@ namespace vplan
 				}
 			}));
 		}
+		static bool UserInterfaceIdiomIsPhone {
+			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
+		}
+
 		protected void Alert () {
 			completionHandler (UIBackgroundFetchResult.Failed);
 		}
