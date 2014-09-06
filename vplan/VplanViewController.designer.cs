@@ -9,25 +9,17 @@ using System.CodeDom.Compiler;
 
 namespace vplan
 {
-	[Register ("SecondViewController")]
-	partial class SecondViewController
+	[Register ("VplanViewController")]
+	partial class VplanViewController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIActivityIndicatorView spinner { get; set; }
-
-		[Outlet]
-		MonoTouch.UIKit.UITableView table { get; set; }
+		MonoTouch.UIKit.UIActivityIndicatorView spinnner { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (spinner != null) {
-				spinner.Dispose ();
-				spinner = null;
-			}
-
-			if (table != null) {
-				table.Dispose ();
-				table = null;
+			if (spinnner != null) {
+				spinnner.Dispose ();
+				spinnner = null;
 			}
 		}
 	}
