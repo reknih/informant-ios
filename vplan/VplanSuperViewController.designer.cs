@@ -9,18 +9,12 @@ using System.CodeDom.Compiler;
 
 namespace vplan
 {
-	[Register ("VplanViewController")]
-	partial class VplanViewController
+	[Register ("VplanSuperViewController")]
+	partial class VplanSuperViewController
 	{
-		[Outlet]
-		MonoTouch.UIKit.UIActivityIndicatorView spinnner { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (spinnner != null) {
-				spinnner.Dispose ();
-				spinnner = null;
-			}
 		}
 	}
 }

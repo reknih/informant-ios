@@ -13,6 +13,9 @@ namespace vplan
 	partial class NewsItemController
 	{
 		[Outlet]
+		MonoTouch.UIKit.UIButton btnMore { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UIImageView imgMain { get; set; }
 
 		[Outlet]
@@ -26,11 +29,6 @@ namespace vplan
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (lblTitle != null) {
-				lblTitle.Dispose ();
-				lblTitle = null;
-			}
-
 			if (imgMain != null) {
 				imgMain.Dispose ();
 				imgMain = null;
@@ -41,9 +39,19 @@ namespace vplan
 				lblSource = null;
 			}
 
+			if (lblTitle != null) {
+				lblTitle.Dispose ();
+				lblTitle = null;
+			}
+
 			if (txtMain != null) {
 				txtMain.Dispose ();
 				txtMain = null;
+			}
+
+			if (btnMore != null) {
+				btnMore.Dispose ();
+				btnMore = null;
 			}
 		}
 	}

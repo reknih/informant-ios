@@ -103,7 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
-    <None Include="Resources\vplan.entitlements" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -137,15 +136,19 @@
       <DependentUpon>VplanViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="vplan.Kit\NewsTableSource.cs" />
+    <Compile Include="NewsSuperViewController.cs" />
+    <Compile Include="NewsSuperViewController.designer.cs">
+      <DependentUpon>NewsSuperViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VplanSuperViewController.cs" />
+    <Compile Include="VplanSuperViewController.designer.cs">
+      <DependentUpon>VplanSuperViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="vplan.Kit\RenaissanceSplitViewDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\NewsPageController_iPad.xib" />
-    <InterfaceDefinition Include="Resources\NewsPageController_iPhone.xib" />
-    <InterfaceDefinition Include="Resources\MainStoryboard.storyboard" />
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
     <InterfaceDefinition Include="MainStoryboard_iPad.storyboard" />
-    <InterfaceDefinition Include="Resources\FirstViewController_iPad.xib" />
-    <InterfaceDefinition Include="Resources\FirstViewController_iPhone.xib" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\first.png" />
@@ -164,11 +167,13 @@
     <BundleResource Include="Resources\Images.xcassets\LaunchImage.launchimage\Default%402x.png" />
     <BundleResource Include="Settings.bundle\Root.plist" />
     <BundleResource Include="Entitlements.plist" />
-    <BundleResource Include="Resources\Entitlements.plist" />
     <BundleResource Include="Resources\Info.plist" />
     <BundleResource Include="Resources\Settings.bundle\Root.plist" />
+    <BundleResource Include="Resources\third.png" />
+    <BundleResource Include="Resources\third%402x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json" />
     <ImageAsset Include="Resources\iPad.png" />

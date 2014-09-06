@@ -11,8 +11,7 @@ namespace vplan
 	{
 		public NavController (IntPtr handle) : base (handle)
 		{
-			this.Title = "Nachrichten";
-			this.TabBarItem.Image = UIImage.FromBundle ("third");
+
 		}
 	}
 }

@@ -22,10 +22,12 @@ namespace vplan
 		public GroupController (IntPtr handle) : base (handle)
 		{
 			fetcher = new Fetcher (Alert, refresh);
-			if (UserInterfaceIdiomIsPhone) {
-				this.Title = "Klasse";
-				this.TabBarItem.Image = UIImage.FromBundle ("second");
-			}
+			this.Title = "Klasse";
+			this.TabBarItem.Image = UIImage.FromBundle ("second");
+			EdgesForExtendedLayout = UIRectEdge.None;
+			ExtendedLayoutIncludesOpaqueBars = false;
+			AutomaticallyAdjustsScrollViewInsets = false;
+
 		}
 
 		public void Alert (string title, string text, string btn) {
@@ -42,23 +44,22 @@ namespace vplan
 		{
 			base.ViewDidLoad ();
 			spinnner.StartAnimating ();
-			fetcher.getClasses();
-			// Perform any additional setup after loading the view, typically from a nib.
+			fetcher.getClasses ();
+			TableView.ContentInset = new UIEdgeInsets (20.0f, 0.0f, 0.0f, 0.0f);
+		}
+		public override void ViewDidAppear (bool animated)
+		{
+
 		}
 
 		public void add(Group v1) {
 			InvokeOnMainThread (new NSAction (delegate {
 				spinnner.StopAnimating ();
 				ti.Add (v1);
-				if (table == null) {
-					table = new UITableView (View.Bounds);
-					table.AutoresizingMask = UIViewAutoresizing.All;
-					table.Source = new GroupTableSource (ti, this);
-					Add (table);
-				} else {
-					table.Source = new GroupTableSource (ti, this);
-					table.ReloadData();
-				}
+
+				TableView.Source = new GroupTableSource (ti, this);
+				TableView.ReloadData();
+
 			}));
 		}
 
@@ -67,9 +68,7 @@ namespace vplan
 				ti.Clear ();
 			InvokeOnMainThread (new NSAction (delegate {
 				spinnner.StartAnimating();
-				if (table != null) {
-					table = null;
-				}
+
 			}));
 		}
 
@@ -84,9 +83,10 @@ namespace vplan
 		public void refresh(List<Group> v1) {
 			InvokeOnMainThread (new NSAction (delegate {
 				spinnner.StopAnimating ();
-				table.Source = new GroupTableSource (v1, this);
-				table.ReloadData();
+				TableView.Source = new GroupTableSource (v1, this);
 				ti = v1;
+				table.ReloadData();
+				TableView.ReloadInputViews();
 			}));
 		}
 
@@ -94,7 +94,7 @@ namespace vplan
 		{
 			List<Group> tableItems = new List<Group> ();
 			tableItems.Add (new Group ());
-			table.Source = new GroupTableSource (tableItems, this);
+			TableView.Source = new GroupTableSource (tableItems, this);
 		}
 
 	}

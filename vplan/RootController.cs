@@ -9,8 +9,26 @@ namespace vplan
 {
 	public partial class RootController : UITabBarController
 	{
+		static bool UserInterfaceIdiomIsPhone {
+			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
+		}
+
 		public RootController (IntPtr handle) : base (handle)
 		{
+			EdgesForExtendedLayout = UIRectEdge.None;
+			ExtendedLayoutIncludesOpaqueBars = false;
+			AutomaticallyAdjustsScrollViewInsets = false;
+			UINavigationBar.Appearance.BackgroundColor = UIColor.FromRGB(0,31,63);
+			UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(0,31,63);
+			UINavigationBar.Appearance.TintColor = UIColor.White;
+			var attr = new UITextAttributes ();
+			attr.TextColor = UIColor.White;
+			UINavigationBar.Appearance.SetTitleTextAttributes(attr);
+			UIApplication.SharedApplication.SetStatusBarStyle (UIStatusBarStyle.LightContent, true);
+		}
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
 		}
 	}
 }

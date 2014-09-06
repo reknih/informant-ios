@@ -11,15 +11,22 @@ namespace vplan
 		NewsListController lc;
 		public News selected;
 		string cellIdentifier = "TableCell";
+
+		static bool UserInterfaceIdiomIsPhone {
+			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
+		}
+
 		public NewsTableSource (List<News> items, NewsListController _lc)
 		{
 			tableItems = items;
 			lc = _lc;
 		}
+
 		public override int RowsInSection (UITableView tableview, int section)
 		{
 			return tableItems.Count;
 		}
+
 		public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
 		{
 			UITableViewCell cell = tableView.DequeueReusableCell (cellIdentifier);
@@ -34,7 +41,11 @@ namespace vplan
 		public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 		{
 			selected = tableItems [indexPath.Row];
-			lc.PerformSegue ("NewsItemSegue", this);
+			if (UserInterfaceIdiomIsPhone) {
+				lc.PerformSegue ("NewsItemSegue", this);
+			} else {
+				((NewsSuperViewController)lc.ParentViewController).blackMesa (tableItems [indexPath.Row]);
+			}
 			//new UIAlertView("Row Selected", tableItems[indexPath.Row].Line1, null, "OK", null).Show();
 			tableView.DeselectRow (indexPath, true); // normal iOS behaviour is to remove the blue highlight
 		}

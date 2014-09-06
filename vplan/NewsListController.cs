@@ -19,9 +19,17 @@ namespace vplan
 
 		public NewsListController (IntPtr handle) : base (handle)
 		{
+
 			this.Title = "Nachrichten";
 			this.TabBarItem.Image = UIImage.FromBundle ("third");
+
 			press = new Press ();
+			this.NavigationItem.SetRightBarButtonItem (
+				new UIBarButtonItem ("Zurück", UIBarButtonItemStyle.Done, delegate(object sender, EventArgs e) {
+					var initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
+					NavigationController.NavigationBarHidden = true;
+					NavigationController.PushViewController (initialViewController, true);
+				}), true);
 		}
 
 		static bool UserInterfaceIdiomIsPhone {
@@ -36,11 +44,14 @@ namespace vplan
 			}));
 		}
 
-		public override void ViewDidAppear(bool an)
+		public override void ViewDidLoad()
 		{
-			base.ViewDidAppear (an);
+			base.ViewDidLoad ();
 			spinner.StartAnimating ();
 			InitNews ();
+			if (!UserInterfaceIdiomIsPhone) {
+				TableView.ContentInset = new UIEdgeInsets (20.0f, 0.0f, 20.0f, 0.0f);
+			}
 		}
 			
 		public override void PrepareForSegue (UIStoryboardSegue segue, 
@@ -102,6 +113,9 @@ namespace vplan
 					table.Source = new NewsTableSource (globNews, this);
 					table.ReloadData ();
 				}
+				try {
+				((NewsSuperViewController)ParentViewController).blackMesa(globNews[0]);
+				} catch {}
 			}));
 		}
 	}

@@ -15,8 +15,6 @@ namespace vplan
 	{
 		// class-level declarations
 		UIWindow window;
-		UITabBarController tabBarController;
-		UISplitViewController splitViewController;
 		Action<UIBackgroundFetchResult> completionHandler;
 		PrefManager pm = new PrefManager ();
 		NSUserDefaults nu = new NSUserDefaults();

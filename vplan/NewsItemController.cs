@@ -16,24 +16,50 @@ namespace vplan
 
 		public NewsItemController (IntPtr handle) : base (handle)
 		{
-			//lblTitle.Text = theNews.Title;
+			this.NavigationItem.SetRightBarButtonItem (
+				new UIBarButtonItem ("Zurück", UIBarButtonItemStyle.Done, delegate(object sender, EventArgs e) {
+					var initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
+					NavigationController.NavigationBarHidden = true;
+					NavigationController.PushViewController (initialViewController, true);
+				}), true);
 		}
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad ();
-			lblTitle.Text = theNews.Title;
-			txtMain.Text = theNews.Content;
-			if (theNews.Source.AbsoluteUri.IndexOf (VConfig.url) != -1) {
-				lblSource.Text = "Christian-Wirth-Schule";
-			} else {
-				lblSource.Text = "SR-Blog";
+			txtMain.Editable = false;
+			InitNewsPage ();
+			btnMore.TouchUpInside += (object sender, EventArgs e) => {
+				try {
+					UIApplication.SharedApplication.OpenUrl(new NSUrl(theNews.Source.AbsoluteUri));
+				} catch {}
+			};
+		}
+		static bool UserInterfaceIdiomIsPhone {
+			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }
+		}
+
+		public void InitNewsPage()
+		{
+			if (theNews != null) {
+				lblTitle.Text = theNews.Title;
+				txtMain.Text = theNews.Content;
+				if (theNews.Source.AbsoluteUri.IndexOf (VConfig.url) != -1) {
+					lblSource.Text = "Christian-Wirth-Schule";
+				} else {
+					lblSource.Text = "SR-Blog";
+				}
+				NSUrl URLWithString = new NSUrl (theNews.Image);
+				NSData dataWithContentsOfURL = NSData.FromUrl (URLWithString);
+				UIImage myImage = new UIImage (dataWithContentsOfURL, 1.0f);
+				imgMain.ContentMode = UIViewContentMode.ScaleAspectFit;
+				imgMain.ClipsToBounds = true;
+				imgMain.Image = myImage;
 			}
-			NSUrl URLWithString = new NSUrl(theNews.Image);
-			NSData dataWithContentsOfURL = NSData.FromUrl(URLWithString);
-			UIImage myImage = new UIImage(dataWithContentsOfURL, 1.0f);
-			imgMain.ContentMode = UIViewContentMode.ScaleAspectFit;
-			imgMain.ClipsToBounds = true;
-			imgMain.Image = myImage;
+		}
+		public void freshNews (News n)
+		{
+			theNews = n;
+			InitNewsPage();
 		}
 	}
 }
