@@ -48,10 +48,22 @@ namespace vplan
 		{
 			base.ViewDidLoad ();
 			spinner.StartAnimating ();
-			InitNews ();
 			if (!UserInterfaceIdiomIsPhone) {
 				TableView.ContentInset = new UIEdgeInsets (20.0f, 0.0f, 20.0f, 0.0f);
+			} else {
+				SetNeedsStatusBarAppearanceUpdate();
+				UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
+				UIApplication.SharedApplication.SetStatusBarStyle (UIStatusBarStyle.LightContent, false);
+				try {
+					((NewsSuperViewController)ParentViewController).blackMesa(globNews[0]);
+				} catch {}
 			}
+			InitNews ();
+
+		}
+		public override UIStatusBarStyle PreferredStatusBarStyle ()
+		{
+			return UIStatusBarStyle.LightContent;
 		}
 			
 		public override void PrepareForSegue (UIStoryboardSegue segue, 
@@ -80,7 +92,7 @@ namespace vplan
 				if (group == 0) {
 					throw new Exception();
 				} else {
-					fetcher = new Fetcher(addToNewsTable, group, 30);
+					fetcher = new Fetcher(addToNewsTable, group);
 				}
 			}
 			catch {

@@ -124,7 +124,7 @@ namespace vplan
 					}
 					TableView.Source = new TableSource (_ti);
 					TableView.ReloadData();
-					TableView.Init();
+					TableView.AwakeFromNib();
 				} catch {} 
 			}));
 		}
@@ -156,7 +156,7 @@ namespace vplan
 				}
 				TableView.Source = new TableSource(_ti);
 				TableView.ReloadData();
-				TableView.Init();
+				TableView.AwakeFromNib();
 				ti = v1;
 			}));
 		}

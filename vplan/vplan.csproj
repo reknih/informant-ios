@@ -54,7 +54,10 @@
     <CodesignKey>iPhone Developer: Hartmut Haug (6QBAQ7L5W9)</CodesignKey>
     <IpaPackageName>
     </IpaPackageName>
-    <CodesignProvision>37F34A11-A084-4D7F-B546-1BDE0F80252E</CodesignProvision>
+    <CodesignProvision>84cf85cd-628d-4851-bb76-7dc54dddffd0</CodesignProvision>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>

@@ -18,17 +18,26 @@ namespace vplan
 			EdgesForExtendedLayout = UIRectEdge.None;
 			ExtendedLayoutIncludesOpaqueBars = false;
 			AutomaticallyAdjustsScrollViewInsets = false;
-			UINavigationBar.Appearance.BackgroundColor = UIColor.FromRGB(0,31,63);
+			//UINavigationBar.Appearance.BackgroundColor = UIColor.FromRGB(0,31,63);
 			UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(0,31,63);
 			UINavigationBar.Appearance.TintColor = UIColor.White;
 			var attr = new UITextAttributes ();
 			attr.TextColor = UIColor.White;
 			UINavigationBar.Appearance.SetTitleTextAttributes(attr);
-			UIApplication.SharedApplication.SetStatusBarStyle (UIStatusBarStyle.LightContent, true);
+			UIApplication.SharedApplication.StatusBarHidden = false;
 		}
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+		}
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
+			SetNeedsStatusBarAppearanceUpdate();
+		}
+		public override UIStatusBarStyle PreferredStatusBarStyle ()
+		{
+			return UIStatusBarStyle.LightContent;
 		}
 	}
 }
