@@ -96,7 +96,7 @@ namespace vplan
 				}
 			}
 			catch {
-				fetcher = new Fetcher(addToNewsTable, 5, 30);
+				fetcher = new Fetcher(addToNewsTable, 5);
 			}
 			try {
 				if (table == null) {

@@ -92,7 +92,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>43D626F6-A698-4284-9EF6-89A56745C409</CodesignProvision>
+    <CodesignProvision>74880511-8fa7-45fb-85c8-35597fcd45f8</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <MtouchI18n>
     </MtouchI18n>

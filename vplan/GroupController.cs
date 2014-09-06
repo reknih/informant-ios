@@ -76,6 +76,8 @@ namespace vplan
 			if (UserInterfaceIdiomIsPhone) {
 				this.TabBarController.SelectedIndex = 0;
 				this.TabBarController.SelectedViewController = TabBarController.ChildViewControllers [0];
+			} else {
+				((VplanSuperViewController)SplitViewController).highwayToHell();
 			}
 		}
 			
@@ -85,8 +87,12 @@ namespace vplan
 				spinnner.StopAnimating ();
 				TableView.Source = new GroupTableSource (v1, this);
 				ti = v1;
-				table.ReloadData();
+				TableView.ReloadData();
 				TableView.ReloadInputViews();
+				if (!UserInterfaceIdiomIsPhone)
+				{
+					((VplanSuperViewController)SplitViewController).highwayToHell();
+				}
 			}));
 		}
 

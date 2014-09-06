@@ -49,7 +49,8 @@ namespace vplan
 		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
-			InitVplan ();
+			if (UserInterfaceIdiomIsPhone)
+				InitVplan ();
 		}
 
 		/// <summary>
