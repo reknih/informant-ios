@@ -11,7 +11,19 @@ namespace vplan
 	{
 		public NavController (IntPtr handle) : base (handle)
 		{
+			NavigationBar.BarStyle = UIBarStyle.Black;
+		}
 
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+			SetNeedsStatusBarAppearanceUpdate();
+			UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
+			UIApplication.SharedApplication.SetStatusBarStyle (UIStatusBarStyle.LightContent, false);
+		}
+		public override UIStatusBarStyle PreferredStatusBarStyle ()
+		{
+			return UIStatusBarStyle.LightContent;
 		}
 	}
 }

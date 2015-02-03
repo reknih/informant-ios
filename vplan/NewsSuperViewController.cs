@@ -24,6 +24,11 @@ namespace vplan
 			controllers = ViewControllers;
 			Delegate = new RenaissanceSplitViewDelegate ();
 		}
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+			SetNeedsStatusBarAppearanceUpdate ();
+		}
 
 		public void blackMesa(News incident)
 		{

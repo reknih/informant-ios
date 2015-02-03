@@ -49,7 +49,8 @@ namespace vplan
 		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
-			InitVplan ();
+			if (UserInterfaceIdiomIsPhone)
+				InitVplan ();
 		}
 
 		/// <summary>
@@ -124,7 +125,7 @@ namespace vplan
 					}
 					TableView.Source = new TableSource (_ti);
 					TableView.ReloadData();
-					TableView.Init();
+					TableView.AwakeFromNib();
 				} catch {} 
 			}));
 		}
@@ -156,7 +157,7 @@ namespace vplan
 				}
 				TableView.Source = new TableSource(_ti);
 				TableView.ReloadData();
-				TableView.Init();
+				TableView.AwakeFromNib();
 				ti = v1;
 			}));
 		}
