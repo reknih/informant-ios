@@ -114,6 +114,8 @@ namespace vplan
 		}
 
 		protected void addToNewsTable (News n) {
+			if (n.Content == null)
+				return;
 			globNews.Insert (0, n);
 			InvokeOnMainThread (new NSAction (delegate {
 				if (table == null) {

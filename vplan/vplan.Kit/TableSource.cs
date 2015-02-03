@@ -23,8 +23,11 @@ namespace vplan
 			// if there are no cells to reuse, create a new one
 			if (cell == null)
 				cell = new UITableViewCell (UITableViewCellStyle.Subtitle, cellIdentifier);
-			cell.TextLabel.Text = tableItems[indexPath.Row].Line1;
-			cell.DetailTextLabel.Text = tableItems[indexPath.Row].Line2;
+			try {
+				cell.TextLabel.Text = tableItems[indexPath.Row].Line1;
+				cell.DetailTextLabel.Text = tableItems[indexPath.Row].Line2;
+			} catch {
+			}
 			return cell;
 		}
 		public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
@@ -68,8 +71,11 @@ namespace vplan
 		}
 		public override bool CanEditRow (UITableView tableView, NSIndexPath indexPath)
 		{
+			try {
 			if (tableItems [indexPath.Row].Head == true) {
 				return false;
+			}
+			} catch {
 			}
 			return true; // return false if you wish to disable editing for a specific indexPath or for all rows
 		}
