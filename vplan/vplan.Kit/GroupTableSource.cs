@@ -9,8 +9,8 @@ namespace vplan
 	public class GroupTableSource : UITableViewSource {
 		List<Group> tableItems;
 		string cellIdentifier = "TableCell";
-		SecondViewController _sv;
-		public GroupTableSource (List<Group> items, SecondViewController sv)
+		GroupController _sv;
+		public GroupTableSource (List<Group> items, GroupController sv)
 		{
 			tableItems = items;
 			_sv = sv;
@@ -35,7 +35,7 @@ namespace vplan
 			tableView.DeselectRow (indexPath, true); // normal iOS behaviour is to remove the grey-ish highlight
 			_sv.changeView ();
 			if (UIDevice.CurrentDevice.UserInterfaceIdiom != UIUserInterfaceIdiom.Phone) {
-				_sv.goToUpdate (indexPath.Row + 1);
+				((VplanSuperViewController)_sv.SplitViewController).highwayToHell ();
 			}
 		}
 		public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, MonoTouch.Foundation.NSIndexPath indexPath)

@@ -9,20 +9,20 @@ using System.CodeDom.Compiler;
 
 namespace vplan
 {
-	[Register ("FirstViewController")]
-	partial class FirstViewController
+	[Register ("NewsListController")]
+	partial class NewsListController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIActivityIndicatorView spinnner { get; set; }
+		MonoTouch.UIKit.UIActivityIndicatorView spinner { get; set; }
 
 		[Outlet]
 		MonoTouch.UIKit.UITableView table { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (spinnner != null) {
-				spinnner.Dispose ();
-				spinnner = null;
+			if (spinner != null) {
+				spinner.Dispose ();
+				spinner = null;
 			}
 
 			if (table != null) {
