@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Threading;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace vplan
 {
@@ -18,7 +18,7 @@ namespace vplan
 		}
 		public int getInt (string key) {
 			int val;
-			val = locstore.IntForKey (key);
+			val = Convert.ToInt32(locstore.IntForKey (key));
 			return val;
 		}
 		public string getString (string key) {

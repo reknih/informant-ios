@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace vplan
@@ -13,19 +13,19 @@ namespace vplan
 	partial class NewsItemController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton btnMore { get; set; }
+		UIKit.UIButton btnMore { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIImageView imgMain { get; set; }
+		UIKit.UIImageView imgMain { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel lblSource { get; set; }
+		UIKit.UILabel lblSource { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel lblTitle { get; set; }
+		UIKit.UILabel lblTitle { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITextView txtMain { get; set; }
+		UIKit.UITextView txtMain { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{

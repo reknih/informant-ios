@@ -3,8 +3,8 @@
 using System;
 using System.Text;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 using UntisExp;
 

@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 using UntisExp;
 
@@ -31,9 +31,9 @@ namespace vplan
 		}
 
 		public void Alert (string title, string text, string btn) {
-			InvokeOnMainThread (new NSAction (delegate {
+			InvokeOnMainThread (() => {
 				new UIAlertView (title, text, null, btn, null).Show ();
-			}));
+			});
 		}
 
 		public void refresh (List<Data> s) {
@@ -53,23 +53,23 @@ namespace vplan
 		}
 
 		public void add(Group v1) {
-			InvokeOnMainThread (new NSAction (delegate {
+			InvokeOnMainThread (() =>{
 				spinnner.StopAnimating ();
 				ti.Add (v1);
 
 				TableView.Source = new GroupTableSource (ti, this);
 				TableView.ReloadData();
 
-			}));
+			});
 		}
 
 		public void clear() {
 			if (ti != null)
 				ti.Clear ();
-			InvokeOnMainThread (new NSAction (delegate {
+			InvokeOnMainThread (()=>{
 				spinnner.StartAnimating();
 
-			}));
+			});
 		}
 
 		public void changeView () {
@@ -83,7 +83,7 @@ namespace vplan
 			
 
 		public void refresh(List<Group> v1) {
-			InvokeOnMainThread (new NSAction (delegate {
+			InvokeOnMainThread (()=>{
 				spinnner.StopAnimating ();
 				TableView.Source = new GroupTableSource (v1, this);
 				ti = v1;
@@ -93,7 +93,7 @@ namespace vplan
 				{
 					((VplanSuperViewController)SplitViewController).highwayToHell();
 				}
-			}));
+			});
 		}
 
 		protected void CreateTableItems ()

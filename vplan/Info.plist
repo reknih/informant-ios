@@ -10,6 +10,10 @@
 	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>com.centrallink.vplan</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.7</string>
+	<key>CFBundleVersion</key>
+	<string>1.7.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -54,11 +58,5 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
-	<key>CFBundleShortVersionString</key>
-	<string>2.1</string>
-	<key>CFBundleVersion</key>
-	<string>2.1.2</string>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
 </dict>
 </plist>

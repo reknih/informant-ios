@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using UIKit;
+using Foundation;
 using UntisExp;
 
 namespace vplan
@@ -13,11 +13,11 @@ namespace vplan
 		{
 			tableItems = items;
 		}
-		public override int RowsInSection (UITableView tableview, int section)
+		public override nint RowsInSection (UITableView tableview, nint section)
 		{
 			return tableItems.Count;
 		}
-		public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
+		public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
 		{
 			UITableViewCell cell = tableView.DequeueReusableCell (cellIdentifier);
 			// if there are no cells to reuse, create a new one
@@ -35,7 +35,7 @@ namespace vplan
 			//new UIAlertView("Row Selected", tableItems[indexPath.Row].Line1, null, "OK", null).Show();
 			tableView.DeselectRow (indexPath, true); // normal iOS behaviour is to remove the blue highlight
 		}
-		public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, MonoTouch.Foundation.NSIndexPath indexPath)
+		public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
 		{
 			switch (editingStyle) {
 			case UITableViewCellEditingStyle.Delete:

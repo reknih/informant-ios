@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace vplan
@@ -13,10 +13,10 @@ namespace vplan
 	partial class NewsListController
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIActivityIndicatorView spinner { get; set; }
+		UIKit.UIActivityIndicatorView spinner { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UITableView table { get; set; }
+		UIKit.UITableView table { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{

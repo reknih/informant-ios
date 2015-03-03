@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using UntisExp;
 
 namespace vplan
@@ -38,10 +38,10 @@ namespace vplan
 
 		public void Alert (string title, string text, string btn)
 		{
-			InvokeOnMainThread (new NSAction (delegate {
+			InvokeOnMainThread (() => {
 				spinner.StopAnimating();
 				new UIAlertView (title, text, null, btn, null).Show ();
-			}));
+			});
 		}
 
 		public override void ViewDidLoad()
@@ -117,7 +117,7 @@ namespace vplan
 			if (n.Content == null)
 				return;
 			globNews.Insert (0, n);
-			InvokeOnMainThread (new NSAction (delegate {
+			InvokeOnMainThread (() => {
 				if (table == null) {
 					table = new UITableView (View.Bounds);
 					table.AutoresizingMask = UIViewAutoresizing.All;
@@ -130,7 +130,7 @@ namespace vplan
 				try {
 				((NewsSuperViewController)ParentViewController).blackMesa(globNews[0]);
 				} catch {}
-			}));
+			});
 		}
 	}
 }
