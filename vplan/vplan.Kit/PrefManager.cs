@@ -5,7 +5,7 @@ using UIKit;
 
 namespace vplan
 {
-	public class PrefManager : UntisExp.ISettings
+	public class PrefManager : UntisExp.Interfaces.ISettings
 	{
 		NSUserDefaults locstore = new NSUserDefaults();
 		public PrefManager ()
@@ -15,24 +15,25 @@ namespace vplan
 		protected void refresh () {
 			locstore.Synchronize ();
 		}
-		public void write(string key, object value){
-			if (value.GetType == typeof(string))
-				locstore.SetString (key, value);
-			else if (value.GetType == typeof(int))
-				locstore.SetInt (key, value);
-			else if (value.GetType == typeof(bool))
-				locstore.SetBool (key, value);
-			else if (value.GetType == typeof(float))
-				locstore.SetFloat (key, value);
-			else if (value.GetType == typeof(double))
-				locstore.SetDouble (key, value);
+		public void Write (string key, object value){
+			if (value.GetType() == typeof(string))
+				locstore.SetString (key, value as string);
+			else if (value.GetType() == typeof(int))
+				locstore.SetInt ((int)value, key);
+			else if (value.GetType() == typeof(bool))
+				locstore.SetBool ((bool)value, key);
+			else if (value.GetType() == typeof(float))
+				locstore.SetFloat ((float)value, key);
+			else if (value.GetType() == typeof(double))
+				locstore.SetDouble ((double)value, key);
 			else
 				locstore.SetNativeField (key, NSObject.FromObject(value));
 			refresh ();
 		}
-		public object read (string key) {
-			var val = locstore.ValueForKey (key);
-			return locstore.ValueForKey (key);
+		public object Read (string key) {
+			var nskey = new NSString (key);
+			var val = locstore.ValueForKey (nskey);
+			return val;
 		}
 		public int getInt (string key) {
 			int val;

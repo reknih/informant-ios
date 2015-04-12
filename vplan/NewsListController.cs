@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Foundation;
 using UIKit;
 using UntisExp;
+using UntisExp.Containers;
 
 namespace vplan
 {
@@ -21,6 +22,10 @@ namespace vplan
 		{
 
 			this.Title = "Nachrichten";
+			fetcher = new Fetcher ();
+			fetcher.RaiseRetreivedNewsItem += (sender, e) => {
+				addToNewsTable(e.News);
+			};
 			this.TabBarItem.Image = UIImage.FromBundle ("third");
 
 			press = new Press ();
@@ -92,11 +97,11 @@ namespace vplan
 				if (group == 0) {
 					throw new Exception();
 				} else {
-					fetcher = new Fetcher(addToNewsTable, group);
+					fetcher.GetTimes(group, Activity.GetNews);
 				}
 			}
 			catch {
-				fetcher = new Fetcher(addToNewsTable, 5);
+				fetcher.GetTimes (5, Activity.GetNews);
 			}
 			try {
 				if (table == null) {

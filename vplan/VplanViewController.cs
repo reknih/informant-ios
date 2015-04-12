@@ -8,6 +8,7 @@ using Foundation;
 using UIKit;
 
 using UntisExp;
+using UntisExp.Containers;
 
 namespace vplan
 {
@@ -27,7 +28,16 @@ namespace vplan
 		{
 			this.Title = "Vertretungen";
 			this.TabBarItem.Image = UIImage.FromBundle ("first");
-			fetcher = new Fetcher (clear, Alert, refresh, add);
+			fetcher = new Fetcher ();
+			fetcher.RaiseReadyToClearView += (sender, e) => {
+				clear();
+			};
+			fetcher.RaiseErrorMessage += (sender, e) => {
+				Alert(e.MessageHead, e.MessageBody, e.MessageButton);
+			};
+			fetcher.RaiseRetreivedScheduleItems += (sender, e) => {
+				refresh(e.Schedule);
+			};
 			ti = new List<Data> ();
 			ili = new List<Igno> ();
 		}
@@ -109,27 +119,7 @@ namespace vplan
 			spinnner.StartAnimating ();
 			InitVplan ();
 		}
-
-		public void add(Data v1) {
-			InvokeOnMainThread (() => {
-				try {
-					ili.ForEach (delegate (Igno curr) {
-						if (curr.Fach == v1.OldSubject && curr.Lehrer == v1.Teacher)
-							throw new Exception();
-					});
-					spinnner.StopAnimating ();
-					ti.Add (v1);
-					List<Data> _ti = ti;
-					if (_ti.Count == 0) {
-						_ti.Add(new Data());
-					}
-					TableView.Source = new TableSource (_ti);
-					TableView.ReloadData();
-					TableView.AwakeFromNib();
-				} catch {} 
-			});
-		}
-
+			
 		public void clear() {
 
 			try {

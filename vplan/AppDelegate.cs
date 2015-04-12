@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Foundation;
 using UIKit;
+using UntisExp.Containers;
 using UntisExp;
 
 namespace vplan
@@ -22,13 +23,17 @@ namespace vplan
 		NSUserDefaults nu = new NSUserDefaults();
 		public static UIStoryboard Storyboard;
 		List<Data> l;
-		//
-		// This method is invoked when the application has loaded and is ready to run. In this
-		// method you should instantiate the window, load the UI into it and then make the window
-		// visible.
-		//
-		// You have 17 seconds to return from this method, or iOS will terminate your application.
-		//
+
+		/// <summary>
+		/// This method is invoked when the application has loaded and is ready to run. In this
+		/// method you should instantiate the window, load the UI into it and then make the window
+		/// visible.
+		/// 
+		/// You have 17 seconds to return from this method, or iOS will terminate your application.
+		/// </summary>
+		/// <returns>always <c>true</c></returns>
+		/// <param name="app">iOS initialized reference for this app</param>
+		/// <param name="options">Launch options</param>
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			// create a new window instance based on the screen size
@@ -66,7 +71,13 @@ namespace vplan
 				mode = 0;
 			}
 			completionHandler = _completionHandler;
-			Fetcher fetcher = new Fetcher (Alert, Refresh, mode);
+			Fetcher fetcher = new Fetcher (mode);
+			fetcher.RaiseErrorMessage += (sender, e) => {
+				Alert();
+			};
+			fetcher.RaiseRetreivedScheduleItems += (sender, e) => {
+				Refresh(e.Schedule);
+			};
 			int group;
 			try {
 				group = pm.getInt ("group");

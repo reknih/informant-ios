@@ -7,6 +7,7 @@ using Foundation;
 using UIKit;
 
 using UntisExp;
+using UntisExp.Containers;
 
 namespace vplan
 {
@@ -21,7 +22,13 @@ namespace vplan
 
 		public GroupController (IntPtr handle) : base (handle)
 		{
-			fetcher = new Fetcher (Alert, refresh);
+			fetcher = new Fetcher ();
+			fetcher.RaiseErrorMessage += (sender, e) => {
+				Alert(e.MessageHead, e.MessageBody, e.MessageButton);
+			};
+			fetcher.RaiseRetreivedScheduleItems += (sender, e) => {
+				refresh(e.Schedule);
+			};
 			this.Title = "Klasse";
 
 			EdgesForExtendedLayout = UIRectEdge.None;
