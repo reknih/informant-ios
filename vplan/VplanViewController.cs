@@ -88,7 +88,7 @@ namespace vplan
 				if (group == 0) {
 					throw new Exception();
 				} else {
-					fetcher.getTimes(group);
+					fetcher.GetTimes(group);
 				}
 			}
 			catch {
@@ -114,7 +114,7 @@ namespace vplan
 			InvokeOnMainThread (() => {
 				try {
 					ili.ForEach (delegate (Igno curr) {
-						if (curr.Fach == v1.AltFach && curr.Lehrer == v1.Lehrer)
+						if (curr.Fach == v1.OldSubject && curr.Lehrer == v1.Teacher)
 							throw new Exception();
 					});
 					spinnner.StopAnimating ();
@@ -145,7 +145,7 @@ namespace vplan
 				{
 					ili.ForEach (delegate (Igno curr) {
 						try{
-							if (curr.Fach == v1[i].AltFach && curr.Lehrer == v1[i].Lehrer)
+							if (curr.Fach == v1[i].OldSubject && curr.Lehrer == v1[i].Teacher)
 								v1.RemoveAt(i);
 						} catch {}
 					});

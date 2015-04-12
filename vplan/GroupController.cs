@@ -23,7 +23,7 @@ namespace vplan
 		{
 			fetcher = new Fetcher (Alert, refresh);
 			this.Title = "Klasse";
-			this.TabBarItem.Image = UIImage.FromBundle ("second");
+
 			EdgesForExtendedLayout = UIRectEdge.None;
 			ExtendedLayoutIncludesOpaqueBars = false;
 			AutomaticallyAdjustsScrollViewInsets = false;
@@ -44,7 +44,7 @@ namespace vplan
 		{
 			base.ViewDidLoad ();
 			spinnner.StartAnimating ();
-			fetcher.getClasses ();
+			fetcher.GetClasses ();
 			TableView.ContentInset = new UIEdgeInsets (20.0f, 0.0f, 0.0f, 0.0f);
 		}
 		public override void ViewDidAppear (bool animated)

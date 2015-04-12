@@ -8,16 +8,6 @@
 	<array>
 		<dict>
 			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Benachichtigungen</string>
-			<key>Key</key>
-			<string>backgrounding</string>
-			<key>DefaultValue</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
 			<key>Title</key>
 			<string>Benachichtigungen für...</string>

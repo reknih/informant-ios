@@ -84,7 +84,7 @@ namespace vplan
 
 		protected async void InitNews() 
 		{
-			var news = await press.getNews ();
+			var news = await press.GetNews ();
 			globNews = news;
 			int group;
 			try {

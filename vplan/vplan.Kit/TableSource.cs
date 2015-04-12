@@ -41,10 +41,10 @@ namespace vplan
 			case UITableViewCellEditingStyle.Delete:
 				// remove the item from the underlying data source
 				string del;
-				if (tableItems [indexPath.Row].AltFach != "" && tableItems [indexPath.Row].Lehrer != "") {
-					del = tableItems [indexPath.Row].AltFach + "%" + tableItems [indexPath.Row].Lehrer;
+				if (tableItems [indexPath.Row].OldSubject != "" && tableItems [indexPath.Row].Teacher != "") {
+					del = tableItems [indexPath.Row].OldSubject + "%" + tableItems [indexPath.Row].Teacher;
 				} else {
-					del = tableItems [indexPath.Row].Fach + "%" + tableItems [indexPath.Row].Vertreter;
+					del = tableItems [indexPath.Row].Subject + "%" + tableItems [indexPath.Row].Cover;
 				}
 				int there;
 				var pm = new PrefManager ();
@@ -82,10 +82,10 @@ namespace vplan
 		public override string TitleForDeleteConfirmation (UITableView tableView, NSIndexPath indexPath)
 		{   // Optional - default text is 'Delete'
 			string r;
-			if (tableItems [indexPath.Row].AltFach != "" && tableItems [indexPath.Row].Lehrer != "") {
-				r = "Ignoriere " + tableItems [indexPath.Row].AltFach + " bei " + tableItems [indexPath.Row].Lehrer;
+			if (tableItems [indexPath.Row].OldSubject != "" && tableItems [indexPath.Row].Teacher != "") {
+				r = "Ignoriere " + tableItems [indexPath.Row].OldSubject + " bei " + tableItems [indexPath.Row].Teacher;
 			} else {
-				r = "Ignoriere " + tableItems [indexPath.Row].Fach + " bei " + tableItems [indexPath.Row].Vertreter;			
+				r = "Ignoriere " + tableItems [indexPath.Row].Subject + " bei " + tableItems [indexPath.Row].Cover;			
 			}
 			return r;
 		}

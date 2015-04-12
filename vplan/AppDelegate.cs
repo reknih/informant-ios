@@ -7,10 +7,12 @@ using UntisExp;
 
 namespace vplan
 {
-	// The UIApplicationDelegate for the application. This class is responsible for launching the
-	// User Interface of the application, as well as listening (and optionally responding) to
-	// application events from iOS.
 	[Register ("AppDelegate")]
+	/// <summary>
+	/// The UIApplicationDelegate for the application. This class is responsible for launching the
+	/// User Interface of the application, as well as listening (and optionally responding) to
+	/// application events from iOS.
+	/// </summary>
 	public partial class AppDelegate : UIApplicationDelegate
 	{
 		// class-level declarations
@@ -49,8 +51,6 @@ namespace vplan
 			window.RootViewController = initialViewController;
 			window.MakeKeyAndVisible ();
 			return true;
-			
-
 		}
 		public override void PerformFetch (UIApplication application, Action<UIBackgroundFetchResult> _completionHandler)
 		{
@@ -58,10 +58,6 @@ namespace vplan
 			nu = new NSUserDefaults();
 			try {
 				nu.Synchronize();
-				if (nu.BoolForKey ("backgrounding") == false) {
-					_completionHandler (UIBackgroundFetchResult.NoData);
-					return;
-				}
 			} catch {
 			}
 			try {
@@ -77,7 +73,7 @@ namespace vplan
 				if (group == 0) {
 					throw new Exception();
 				} else {
-					fetcher.getTimes(group);
+					fetcher.GetTimes(group);
 				}
 			} catch {
 				_completionHandler (UIBackgroundFetchResult.Failed);
@@ -118,7 +114,7 @@ namespace vplan
 					{
 						ili.ForEach (delegate (Igno curr) {
 							try{
-								if (curr.Fach == l[i].AltFach && curr.Lehrer == l[i].Lehrer)
+								if (curr.Fach == l[i].OldSubject && curr.Lehrer == l[i].Teacher)
 									l.RemoveAt(i);
 							} catch {}
 						});

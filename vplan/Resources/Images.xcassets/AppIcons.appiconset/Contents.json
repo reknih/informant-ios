@@ -1,122 +1,121 @@
 {
-  "images": [
+  "images" : [
     {
-      "size": "29x29",
-      "scale": "1x",
-      "idiom": "iphone"
+      "idiom" : "iphone",
+      "size" : "29x29",
+      "scale" : "1x"
     },
     {
-      "size": "29x29",
-      "scale": "2x",
-      "idiom": "iphone"
+      "idiom" : "iphone",
+      "size" : "29x29",
+      "scale" : "2x"
     },
     {
-      "size": "29x29",
-      "scale": "3x",
-      "idiom": "iphone"
+      "idiom" : "iphone",
+      "size" : "29x29",
+      "scale" : "3x"
     },
     {
-      "filename": "Spotlight.png",
-      "size": "40x40",
-      "scale": "2x",
-      "idiom": "iphone"
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "Spotlight.png",
+      "scale" : "2x"
     },
     {
-      "filename": "Spotlight@3x.png",
-      "size": "40x40",
-      "scale": "3x",
-      "idiom": "iphone"
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "Spotlight@3x.png",
+      "scale" : "3x"
     },
     {
-      "filename": "iPhoneApp6.png",
-      "size": "57x57",
-      "scale": "1x",
-      "idiom": "iphone"
+      "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "iPhoneApp6.png",
+      "scale" : "1x"
     },
     {
-      "filename": "iPhoneApp6@2x.png",
-      "size": "57x57",
-      "scale": "2x",
-      "idiom": "iphone"
+      "size" : "57x57",
+      "idiom" : "iphone",
+      "filename" : "iPhoneApp6@2x.png",
+      "scale" : "2x"
     },
     {
-      "filename": "iPhoneApp.png",
-      "size": "60x60",
-      "scale": "2x",
-      "idiom": "iphone"
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "iPhoneApp.png",
+      "scale" : "2x"
     },
     {
-      "filename": "iPhone@3x.png",
-      "size": "60x60",
-      "scale": "3x",
-      "idiom": "iphone"
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "iPhone@3x.png",
+      "scale" : "3x"
     },
     {
-      "size": "29x29",
-      "scale": "1x",
-      "idiom": "ipad"
+      "idiom" : "ipad",
+      "size" : "29x29",
+      "scale" : "1x"
     },
     {
-      "size": "29x29",
-      "scale": "2x",
-      "idiom": "ipad"
+      "idiom" : "ipad",
+      "size" : "29x29",
+      "scale" : "2x"
     },
     {
-      "filename": "iPadSpotlight.png",
-      "size": "40x40",
-      "scale": "1x",
-      "idiom": "ipad"
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "iPadSpotlight.png",
+      "scale" : "1x"
     },
     {
-      "filename": "Spotlight.png",
-      "size": "40x40",
-      "scale": "2x",
-      "idiom": "ipad"
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "Spotlight.png",
+      "scale" : "2x"
     },
     {
-      "size": "50x50",
-      "scale": "1x",
-      "idiom": "ipad"
+      "idiom" : "ipad",
+      "size" : "50x50",
+      "scale" : "1x"
     },
     {
-      "size": "50x50",
-      "scale": "2x",
-      "idiom": "ipad"
+      "idiom" : "ipad",
+      "size" : "50x50",
+      "scale" : "2x"
     },
     {
-      "size": "72x72",
-      "scale": "1x",
-      "idiom": "ipad"
+      "idiom" : "ipad",
+      "size" : "72x72",
+      "scale" : "1x"
     },
     {
-      "size": "72x72",
-      "scale": "2x",
-      "idiom": "ipad"
+      "idiom" : "ipad",
+      "size" : "72x72",
+      "scale" : "2x"
     },
     {
-      "filename": "iPad.png",
-      "size": "76x76",
-      "scale": "1x",
-      "idiom": "ipad"
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "iPad.png",
+      "scale" : "1x"
     },
     {
-      "filename": "iPad@2x.png",
-      "size": "76x76",
-      "scale": "2x",
-      "idiom": "ipad"
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "iPad@2x.png",
+      "scale" : "2x"
     },
     {
-      "filename": "Spotlight@3x.png",
-      "size": "120x120",
-      "scale": "1x",
-      "idiom": "car"
+      "idiom" : "car",
+      "size" : "120x120",
+      "scale" : "1x"
     }
   ],
-  "info": {
-    "version": 1,
-    "author": "xcode"
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
   },
-  "properties": {
-    "pre-rendered": true
+  "properties" : {
+    "pre-rendered" : true
   }
 }
