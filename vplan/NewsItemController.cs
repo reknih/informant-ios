@@ -3,8 +3,8 @@
 using System;
 using System.Text;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 using UntisExp;
 
@@ -43,7 +43,7 @@ namespace vplan
 			if (theNews != null) {
 				lblTitle.Text = theNews.Title;
 				txtMain.Text = theNews.Content;
-				if (theNews.Source.AbsoluteUri.IndexOf (VConfig.url) != -1) {
+				if (theNews.Source.AbsoluteUri.IndexOf (VConfig.Url) != -1) {
 					lblSource.Text = "Christian-Wirth-Schule";
 				} else {
 					lblSource.Text = "SR-Blog";

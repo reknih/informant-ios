@@ -1,16 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using UntisExp;
 
 namespace vplan
 {
-	// The UIApplicationDelegate for the application. This class is responsible for launching the
-	// User Interface of the application, as well as listening (and optionally responding) to
-	// application events from iOS.
 	[Register ("AppDelegate")]
+	/// <summary>
+	/// The UIApplicationDelegate for the application. This class is responsible for launching the
+	/// User Interface of the application, as well as listening (and optionally responding) to
+	/// application events from iOS.
+	/// </summary>
 	public partial class AppDelegate : UIApplicationDelegate
 	{
 		// class-level declarations
@@ -32,6 +34,10 @@ namespace vplan
 			// create a new window instance based on the screen size
 			UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval (UIApplication.BackgroundFetchIntervalMinimum);
 			UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+			var settings = UIUserNotificationSettings.GetSettingsForTypes (UIUserNotificationType.Alert
+			               | UIUserNotificationType.Badge
+			               | UIUserNotificationType.Sound, new NSSet ());
+			UIApplication.SharedApplication.RegisterUserNotificationSettings (settings);
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 
 			if (UserInterfaceIdiomIsPhone) {
@@ -41,22 +47,17 @@ namespace vplan
 			}
 
 			var initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
-
+			UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
 			window.RootViewController = initialViewController;
 			window.MakeKeyAndVisible ();
 			return true;
-			
-
 		}
 		public override void PerformFetch (UIApplication application, Action<UIBackgroundFetchResult> _completionHandler)
 		{
 			int mode;
+			nu = new NSUserDefaults();
 			try {
 				nu.Synchronize();
-				if (nu.BoolForKey ("backgrounding") == false) {
-					_completionHandler (UIBackgroundFetchResult.NoData);
-					return;
-				}
 			} catch {
 			}
 			try {
@@ -72,7 +73,7 @@ namespace vplan
 				if (group == 0) {
 					throw new Exception();
 				} else {
-					fetcher.getTimes(group);
+					fetcher.GetTimes(group);
 				}
 			} catch {
 				_completionHandler (UIBackgroundFetchResult.Failed);
@@ -96,7 +97,7 @@ namespace vplan
 			set;
 		}
 		protected void finish () {
-			InvokeOnMainThread (new NSAction (delegate {
+			InvokeOnMainThread (() => {
 				var ili = new List<Igno>();
 				try {
 					int igC = pm.getInt ("ignoredCount");
@@ -113,7 +114,7 @@ namespace vplan
 					{
 						ili.ForEach (delegate (Igno curr) {
 							try{
-								if (curr.Fach == l[i].AltFach && curr.Lehrer == l[i].Lehrer)
+								if (curr.Fach == l[i].OldSubject && curr.Lehrer == l[i].Teacher)
 									l.RemoveAt(i);
 							} catch {}
 						});
@@ -137,7 +138,10 @@ namespace vplan
 					var notification = new UILocalNotification();
 
 					// set the fire date (the date time in which it will fire)
-					notification.FireDate = DateTime.Now;
+					DateTime now = DateTime.Now.AddSeconds(2);
+					if (now.Kind == DateTimeKind.Unspecified)
+						now = DateTime.SpecifyKind(now, DateTimeKind.Local);
+					notification.FireDate = ((NSDate)now);
 
 					// configure the alert stuff
 					notification.AlertAction = "Anzeigen";
@@ -158,7 +162,7 @@ namespace vplan
 					UIApplication.SharedApplication.ScheduleLocalNotification(notification);
 					completionHandler (UIBackgroundFetchResult.NewData);
 				}
-			}));
+			});
 		}
 		static bool UserInterfaceIdiomIsPhone {
 			get { return UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone; }

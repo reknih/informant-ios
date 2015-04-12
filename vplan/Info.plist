@@ -55,10 +55,8 @@
 	<key>XSAppIconAssets</key>
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.1</string>
+	<string>2.4</string>
 	<key>CFBundleVersion</key>
-	<string>2.1.2</string>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
+	<string>2.4.0</string>
 </dict>
 </plist>

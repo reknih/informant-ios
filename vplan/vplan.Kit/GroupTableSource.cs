@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using UIKit;
+using Foundation;
 using UntisExp;
 
 namespace vplan
@@ -15,11 +15,11 @@ namespace vplan
 			tableItems = items;
 			_sv = sv;
 		}
-		public override int RowsInSection (UITableView tableview, int section)
+		public override nint RowsInSection (UITableView tableview, nint section)
 		{
 			return tableItems.Count;
 		}
-		public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
+		public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
 		{
 			UITableViewCell cell = tableView.DequeueReusableCell (cellIdentifier);
 			// if there are no cells to reuse, create a new one
@@ -38,7 +38,7 @@ namespace vplan
 				((VplanSuperViewController)_sv.SplitViewController).highwayToHell ();
 			}
 		}
-		public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, MonoTouch.Foundation.NSIndexPath indexPath)
+		public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath)
 		{
 			switch (editingStyle) {
 			case UITableViewCellEditingStyle.Delete:
